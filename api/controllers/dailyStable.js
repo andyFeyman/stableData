@@ -16,7 +16,7 @@ const stableATHData = await prisma.stableATH.findFirst({
 
 console.log(stableATHData);
 
-const stableATHVolume = BigInt(stableATHData.volume);
+const stableATHVolume = Math.trunc(stableATHData.volume);
 
 
 export const runTask =  async function(){
@@ -33,11 +33,11 @@ export const runTask =  async function(){
       //因为
       
       if(response){
-        const stablecoinMarketCap =BigInt(response.data.data.stablecoin_market_cap);
+        const stablecoinMarketCap =Math.trunc(response.data.data.stablecoin_market_cap);
 
         console.log("this is stablecoinMarketCap: "+stablecoinMarketCap,typeof(stablecoinMarketCap));
         
-        const stablecoinVolume24h = BigInt(response.data.data.stablecoin_volume_24h);
+        const stablecoinVolume24h = Math.trunc(response.data.data.stablecoin_volume_24h);
 
         console.log("this is stablecoinVolume24h: "+stablecoinVolume24h,typeof(stablecoinVolume24h));
         
