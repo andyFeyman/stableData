@@ -31,23 +31,23 @@ export const runTask =  async function(){
       console.log(response);
       
       if(response){
-        const stablecoinMarketCap =response.data.stablecoin_market_cap;
+        const stablecoinMarketCap =response.data.data.stablecoin_market_cap;
 
-        console.log(stablecoinMarketCap,typeof(stablecoinMarketCap));
+        console.log("this is stablecoinMarketCap:"+stablecoinMarketCap,typeof(stablecoinMarketCap));
         
-        const stablecoinVolume24h = response.data.stablecoin_volume_24h;
+        const stablecoinVolume24h = response.data.data.stablecoin_volume_24h;
 
-        console.log(stablecoinVolume24h,typeof(stablecoinVolume24h));
+        console.log("this is stablecoinVolume24h:"+stablecoinVolume24h,typeof(stablecoinVolume24h));
         
-        const createdAt = response.status.timestamp;
+        const createdAt = response.data.status.timestamp;
 
-        console.log(createdAt,typeof(createdAt));
+        console.log("this is createdAt:"+createdAt,typeof(createdAt));
 
         const volMarketCapRatio = ((stablecoinVolume24h/stablecoinMarketCap)*100).toFixed(2) + '%';
-        console.log(volMarketCapRatio,typeof(volMarketCapRatio));
+        console.log("this is volMarketCapRatio:"+volMarketCapRatio,typeof(volMarketCapRatio));
 
         const dailyVolumeWithATH = ((stablecoinVolume24h/stableATHVolume)*100).toFixed(2)+"%";
-        
+
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
 
         
