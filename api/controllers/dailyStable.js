@@ -16,7 +16,7 @@ const stableATHData = await prisma.stableATH.findFirst({
 
 console.log(stableATHData);
 
-const stableATHVolume = stableATHData.volume;
+const stableATHVolume = BigInt(stableATHData.volume);
 
 
 export const runTask =  async function(){
@@ -29,26 +29,32 @@ export const runTask =  async function(){
       
       
       console.log(response);
+      //需要response.data才能取到响应体的数据
+      //因为
       
       if(response){
-        const stablecoinMarketCap =response.data.data.stablecoin_market_cap;
+        const stablecoinMarketCap =BigInt(response.data.data.stablecoin_market_cap);
 
-        console.log("this is stablecoinMarketCap:"+stablecoinMarketCap,typeof(stablecoinMarketCap));
+        console.log("this is stablecoinMarketCap: "+stablecoinMarketCap,typeof(stablecoinMarketCap));
         
-        const stablecoinVolume24h = response.data.data.stablecoin_volume_24h;
+        const stablecoinVolume24h = BigInt(response.data.data.stablecoin_volume_24h);
 
-        console.log("this is stablecoinVolume24h:"+stablecoinVolume24h,typeof(stablecoinVolume24h));
+        console.log("this is stablecoinVolume24h: "+stablecoinVolume24h,typeof(stablecoinVolume24h));
         
         const createdAt = response.data.status.timestamp;
 
-        console.log("this is createdAt:"+createdAt,typeof(createdAt));
+        console.log("this is createdAt: "+createdAt,typeof(createdAt));
 
         const volMarketCapRatio = ((stablecoinVolume24h/stablecoinMarketCap)*100).toFixed(2) + '%';
-        console.log("this is volMarketCapRatio:"+volMarketCapRatio,typeof(volMarketCapRatio));
+        console.log("this is volMarketCapRatio: "+volMarketCapRatio,typeof(volMarketCapRatio));
 
         const dailyVolumeWithATH = ((stablecoinVolume24h/stableATHVolume)*100).toFixed(2)+"%";
+        console.log("this is dailyVolumeWithATH: "+dailyVolumeWithATH,typeof(dailyVolumeWithATH));
+
 
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
+        console.log("this is daysFromATH: "+daysFromATH,typeof(daysFromATH));
+
 
         
         // 更新数据库
