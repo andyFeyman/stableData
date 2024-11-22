@@ -16,7 +16,8 @@ const stableATHData = await prisma.stableATH.findFirst({
 
 console.log(stableATHData);
 
-const stableATHVolume = Math.trunc(stableATHData.volume);
+const stableATHVolumeStr = stableATHData.volume.toString();
+const stableATHVolume = BigInt(stableATHVolumeStr.replace('.', ''));
 
 
 export const runTask =  async function(){
@@ -30,15 +31,21 @@ export const runTask =  async function(){
       
       console.log(response);
       //需要response.data才能取到响应体的数据
-      //因为
+      //用Math.trunc的原因：
+      // BigInt 不能直接与小数进行运算
+      // BigInt 除法运算会自动向下取整，丢失小数部分
+      // BigInt 不支持 .toFixed() 方法
       
       if(response){
-        const stablecoinMarketCap =Math.trunc(response.data.data.stablecoin_market_cap);
+        // 将小数转换为整数，比如乘以 100 保留 2 位小数
+        const marketCapStr = response.data.data.stablecoin_market_cap.toString();
+        const volumeStr = response.data.data.stablecoin_volume_24h.toString();
+        
+        // 移除小数点，转换为整数
+        const stablecoinMarketCap = BigInt(marketCapStr.replace('.', ''));
+        const stablecoinVolume24h = BigInt(volumeStr.replace('.', ''));
 
         console.log("this is stablecoinMarketCap: "+stablecoinMarketCap,typeof(stablecoinMarketCap));
-        
-        const stablecoinVolume24h = Math.trunc(response.data.data.stablecoin_volume_24h);
-
         console.log("this is stablecoinVolume24h: "+stablecoinVolume24h,typeof(stablecoinVolume24h));
         
         const createdAt = response.data.status.timestamp;
