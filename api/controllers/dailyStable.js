@@ -16,7 +16,7 @@ const stableATHData = await prisma.stableATH.findFirst({
 
 console.log(stableATHData);
 
-const stableATHVolume = Number(stableATHData.volume);
+const stableATHVolume = stableATHData.volume;
 
 
 export const runTask =  async function(){
@@ -26,23 +26,37 @@ export const runTask =  async function(){
       // 请求外部API
   
       const response = await CMAPIRequest.get('/v1/global-metrics/quotes/latest');
-
+      
+      
       console.log(response);
       
       if(response){
-        const stablecoinMarketCap =Number(response.data.stablecoin_market_cap);
-        const stablecoinVolume24h = Number(response.data.stablecoin_volume_24h);
+        const stablecoinMarketCap =response.data.stablecoin_market_cap;
+
+        console.log(stablecoinMarketCap,typeof(stablecoinMarketCap));
+        
+        const stablecoinVolume24h = response.data.stablecoin_volume_24h;
+
+        console.log(stablecoinVolume24h,typeof(stablecoinVolume24h));
+        
         const createdAt = response.status.timestamp;
+
+        console.log(createdAt,typeof(createdAt));
+
         const volMarketCapRatio = ((stablecoinVolume24h/stablecoinMarketCap)*100).toFixed(2) + '%';
+        console.log(volMarketCapRatio,typeof(volMarketCapRatio));
+
         const dailyVolumeWithATH = ((stablecoinVolume24h/stableATHVolume)*100).toFixed(2)+"%";
+        
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
 
+        
         // 更新数据库
         await prisma.dailyStable.create({
           data: {
             createdAt: createdAt,
-            volume: Number(stablecoinVolume24h),
-            marketCap: Number(stablecoinMarketCap),
+            volume: stablecoinVolume24h,
+            marketCap: stablecoinMarketCap,
             volMarketCapRatio,
             dailyVolumeWithATH,
             daysFromATH
