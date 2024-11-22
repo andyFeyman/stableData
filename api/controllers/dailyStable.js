@@ -41,8 +41,8 @@ export const runTask =  async function(){
         await prisma.dailyStable.create({
           data: {
             createdAt: createdAt,
-            volume: stablecoinVolume24h,
-            marketCap: stablecoinMarketCap,
+            volume: Number(stablecoinVolume24h),
+            marketCap: Number(stablecoinMarketCap),
             volMarketCapRatio,
             dailyVolumeWithATH,
             daysFromATH
