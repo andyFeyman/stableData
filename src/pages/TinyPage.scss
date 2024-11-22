@@ -1,0 +1,35 @@
+// styles/main.scss
+$primary: #1BA8F0;
+$secondary: #6C757D;
+$success: #75B734;
+$body-bg: #FFFFFF;
+
+// 2. 导入 react-bootstrap 样式
+// @import 'react-bootstrap/scss/bootstrap';
+
+.hero-section {
+  background: linear-gradient(180deg, #E8F7FF 0%, #FFFFFF 100%);
+  padding: 80px 0;
+  
+  .panda-mascot {
+    max-width: 300px;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.comparison-section {
+  background: #F8F9FA;
+  padding: 60px 0;
+  
+  .comparison-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+}

@@ -1,0 +1,35 @@
+// styles/_footer.scss
+.footer {
+    background-color: #1a1a1a;
+    
+    a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: white;
+      }
+    }
+    
+    .social-links {
+      a {
+        font-size: 0.9rem;
+        
+        &:hover {
+          color: #1BA8F0;
+        }
+      }
+    }
+    
+    h5 {
+      color: white;
+      margin-bottom: 1.2rem;
+    }
+    
+    .list-unstyled {
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }

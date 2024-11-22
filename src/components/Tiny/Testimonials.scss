@@ -1,0 +1,32 @@
+// styles/_testimonials.scss
+.testimonials-section {
+    background-color: #f8f9fa;
+    
+    .testimonial-card {
+      border: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+      }
+      
+      .company-name {
+        color: #1BA8F0;
+        font-weight: 600;
+      }
+      
+      .avatar-placeholder {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e9ecef;
+        margin-right: 12px;
+      }
+      
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }

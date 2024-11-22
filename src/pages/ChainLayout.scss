@@ -1,0 +1,23 @@
+.bg-custom-green {
+    background-color: #72BF78;
+  }
+
+.custom-nav {
+    .nav-link {
+      margin-right: 3.5rem;
+      padding: 0.5rem 1rem;
+      
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); //动画变化时间
+
+      &:hover {
+        transform: scale(1.1); //   放大效果1.1倍
+        opacity: 1;
+      }
+      
+      &.active {
+        color: #0984e3;
+        background-color: rgba(9,132,227,0.1);
+      }
+    }
+  }
+

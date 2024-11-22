@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Ball Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            margin: 0;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        .ball {
+        width: 180px;
+        height: 180px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        }
+
+        .liquid-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #007bff; /* Blue color */
+        }
+
+        .liquid {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        }
+
+        .wave1, .wave2, .wave3 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+        }
+
+        .wave1 { transform: rotate(45deg) }
+        .wave2 { transform: rotate(-45deg) }
+        .wave3 { transform: rotate(135deg) }
+
+        .shine {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%); /* Radial gradient for shine */
+        opacity: 0.6;
+        }
+
+        .highlight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Subtle highlight */
+        }
+
+        .percentage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ball">
+          <div class="liquid-container">
+            <div class="liquid">
+              <div class="wave1"></div>
+              <div class="wave2"></div>
+              <div class="wave3"></div>
+            </div>
+            <div class="shine"></div>
+          </div>
+          <div class="highlight"></div>
+        </div>
+        <div class="percentage">0%</div>
+      </div>
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger); // If you use ScrollTrigger for animations triggered by scrolling
+
+        const liquidContainer = document.querySelector('.liquid-container');
+        const percentageText = document.querySelector('.percentage');
+
+        function setLiquidHeight(percentage) {
+        liquidContainer.style.height = `${percentage}%`;
+        percentageText.textContent = `${percentage}%`;
+        }
+
+        // Wave animations using gsap
+
+        gsap.to('.wave1', { duration: 2, rotation: '360deg', repeat: -1 });
+        gsap.to('.wave2', { duration: 1.5, rotation: '-360deg', repeat: -1 });
+        gsap.to('.wave3', { duration: 2.5, rotation: '720deg', repeat: -1 });
+
+        // Liquid movement animations
+
+        const liquidTimeline = gsap.timeline({repeat:-1}); // Create a timeline for repeating animation
+        liquidTimeline.to('.liquid', {duration: 1, x: '+=20', ease: "power1.inOut"});
+        liquidTimeline.to('.liquid', {duration: 1, y: '+=5', ease: "power1.inOut"});
+
+        // Shine effect animation
+
+        gsap.to('.shine', { duration: 1, opacity: 0.3, yoyo: true, repeat: -1 }); // Fade in and out
+
+
+        function updatePercentage(newPercentage) {
+        gsap.to('.liquid-container', { height: `${newPercentage}%`, ease: 'power2.inOut' });
+        gsap.to('.percentage', { textContent: `${newPercentage}%` }); 
+        }
+
+        // Example usage to change the percentage after a delay (you can trigger this with user interactions):
+        setTimeout(() => updatePercentage(60), 1000); // Update to 60% after 1 second
+    </script>
+</body>
+</html>

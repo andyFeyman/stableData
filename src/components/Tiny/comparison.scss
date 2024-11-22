@@ -1,0 +1,13 @@
+// styles/_comparison.scss
+.comparison-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    .comparison-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }

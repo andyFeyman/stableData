@@ -1,0 +1,68 @@
+.cardBox{
+    width: 16rem;
+    display: flex;
+    background-color: #A0D683;
+    color: black;
+
+    .top{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .topText{
+            margin-top: 10px;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+    }
+
+    .cardImg{
+        width: 80px;
+        height: 80px;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+
+    .cardTitle{
+        width: 100px;
+    }
+
+    .cardBody{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
+        
+        .cardListGroup{
+            background-color: #D3EE98;
+            margin-bottom: 10px;
+            font-size:small;
+            &:hover {
+                transform: scale(1.01); //   放大效果1.1倍
+                opacity: 1;
+              }
+        }
+    
+        .cardButton{
+            background-color: #72BF78;
+            color: black;
+            font-size: medium;
+            font-weight: 800;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); //动画变化时间
+            &:hover {
+                transform: scale(1.08); //   放大效果1.1倍
+                opacity: 1;
+              }
+            .OpenInNewIcon{
+                margin-left: 20px;
+                font-size:medium;
+            }
+        }
+    }
+
+}
+
