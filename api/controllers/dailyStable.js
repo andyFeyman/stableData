@@ -31,7 +31,7 @@ export const runTask =  async function(){
       
       console.log(response);
       //需要response.data才能取到响应体的数据
-      //用Math.trunc的原因：
+      //用toString()+BigInt()的原因:
       // BigInt 不能直接与小数进行运算
       // BigInt 除法运算会自动向下取整，丢失小数部分
       // BigInt 不支持 .toFixed() 方法
@@ -52,10 +52,10 @@ export const runTask =  async function(){
 
         console.log("this is createdAt: "+createdAt,typeof(createdAt));
 
-        const volMarketCapRatio = ((stablecoinVolume24h/stablecoinMarketCap)*100).toFixed(2) + '%';
+        const volMarketCapRatio = ((Number(stablecoinVolume24h)/Number(stablecoinMarketCap))*100).toFixed(2) + '%';
         console.log("this is volMarketCapRatio: "+volMarketCapRatio,typeof(volMarketCapRatio));
 
-        const dailyVolumeWithATH = ((stablecoinVolume24h/stableATHVolume)*100).toFixed(2)+"%";
+        const dailyVolumeWithATH = ((Number(stablecoinVolume24h)/Number(stableATHVolume))*100).toFixed(2)+"%";
         console.log("this is dailyVolumeWithATH: "+dailyVolumeWithATH,typeof(dailyVolumeWithATH));
 
 

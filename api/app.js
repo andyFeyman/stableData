@@ -13,7 +13,7 @@ app.use(cors({origin:process.env.CLIENT_URL, credentials:true}));
 app.use("/api/stable",stableRoute);
 
 app.listen(8800,()=>{
-    cron.schedule('*/3 * * * *', async()=>{
+    cron.schedule('*/1 * * * *', async()=>{
         await runTask();
     });
     console.log("server is running!");
