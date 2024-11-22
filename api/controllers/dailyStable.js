@@ -16,7 +16,7 @@ const stableATHData = await prisma.stableATH.findFirst({
 
 console.log(stableATHData);
 
-const stableATHVolume = stableATHData.volume;
+const stableATHVolume = Number(stableATHData.volume);
 
 
 export const runTask =  async function(){
@@ -30,8 +30,8 @@ export const runTask =  async function(){
       console.log(response);
       
       if(response){
-        const stablecoinMarketCap =response.data.stablecoin_market_cap;
-        const stablecoinVolume24h = response.data.stablecoin_volume_24h;
+        const stablecoinMarketCap =Number(response.data.stablecoin_market_cap);
+        const stablecoinVolume24h = Number(response.data.stablecoin_volume_24h);
         const createdAt = response.status.timestamp;
         const volMarketCapRatio = ((stablecoinVolume24h/stablecoinMarketCap)*100).toFixed(2) + '%';
         const dailyVolumeWithATH = ((stablecoinVolume24h/stableATHVolume)*100).toFixed(2)+"%";
@@ -58,6 +58,6 @@ export const runTask =  async function(){
   };
 
 
-cron.schedule('*/1 * * * *', async()=>{
-    await runTask();
-});
+// cron.schedule('*/1 * * * *', async()=>{
+//     await runTask();
+// });
