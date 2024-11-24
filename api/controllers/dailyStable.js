@@ -93,10 +93,10 @@ export const runTask =  async function(){
             
           }
         }
-
+        return (dailData);
       }
       
-      return (dailData);
+     
 
     } catch (error) {
       console.error('定时任务执行失败:', error);
