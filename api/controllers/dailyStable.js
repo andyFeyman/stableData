@@ -7,27 +7,25 @@ import { CMAPIRequest } from '../lib/apiRequest.js';
 
 const prisma = new PrismaClient();
 
+//获取历史ATH
 const stableATHData = await prisma.stableATH.findFirst({
+  orderBy:{
+    createdAt:'desc'
+  },
   select:{
     createdAt:true,
     volume:true,
   }
 });
 
-console.log(stableATHData);
-
 const stableATHVolumeStr = stableATHData.volume.toString();
 const stableATHVolume = BigInt(stableATHVolumeStr.split('.')[0]);
-
 
 export const runTask =  async function(){
     try {
       console.log('开始执行定时任务...');
-      
       // 请求外部API
-  
       const response = await CMAPIRequest.get('/v1/global-metrics/quotes/latest');
-      
       
       console.log(response);
       //需要response.data才能取到响应体的数据
@@ -62,8 +60,6 @@ export const runTask =  async function(){
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
         console.log("this is daysFromATH: "+daysFromATH,typeof(daysFromATH));
 
-
-        
         // 更新数据库
         await prisma.dailyStable.create({
           data: {
@@ -76,7 +72,26 @@ export const runTask =  async function(){
           }
         });
     
-        console.log('数据更新成功');
+        console.log('日常数据更新成功');
+
+        // 更新ATH记录
+        if(stablecoinVolume24h > stableATHVolume){
+          console.log("new ATH created!!!!!!! new ATH created!!!!!!! new ATH created!!!!!!!");
+          try {
+            await prisma.stableATH.create({
+              data:{
+                createdAt:createdAt,
+                volume:stablecoinVolume24h,
+                marketCap:stablecoinMarketCap,
+                volMarketCapRatio:volMarketCapRatio
+              }
+            })
+          } catch (error) {
+            console.log("new ATH created fail: "+error);
+            
+          }
+        }
+
       }
   
     } catch (error) {
