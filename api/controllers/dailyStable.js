@@ -8,18 +8,17 @@ import { CMAPIRequest } from '../lib/apiRequest.js';
 const prisma = new PrismaClient();
 
 //获取历史ATH
+
 const stableATHData = await prisma.stableATH.findFirst({
   orderBy:{
     createdAt:'desc'
-  },
-  select:{
-    createdAt:true,
-    volume:true,
   }
 });
 
 const stableATHVolumeStr = stableATHData.volume.toString();
 const stableATHVolume = BigInt(stableATHVolumeStr.split('.')[0]);
+console.log("stableATHVolume :",stableATHVolume);
+
 
 export const runTask =  async function(){
     try {
@@ -60,18 +59,21 @@ export const runTask =  async function(){
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
         console.log("this is daysFromATH: "+daysFromATH,typeof(daysFromATH));
 
+        const dailData = {
+          createdAt: createdAt,
+          volume: stablecoinVolume24h,
+          marketCap: stablecoinMarketCap,
+          volMarketCapRatio,
+          dailyVolumeWithATH,
+          daysFromATH
+        }
+
         // 更新数据库
         await prisma.dailyStable.create({
-          data: {
-            createdAt: createdAt,
-            volume: stablecoinVolume24h,
-            marketCap: stablecoinMarketCap,
-            volMarketCapRatio,
-            dailyVolumeWithATH,
-            daysFromATH
-          }
+          data: dailData
         });
-    
+
+      
         console.log('日常数据更新成功');
 
         // 更新ATH记录
@@ -93,7 +95,9 @@ export const runTask =  async function(){
         }
 
       }
-  
+      
+      return (dailData);
+
     } catch (error) {
       console.error('定时任务执行失败:', error);
     }
