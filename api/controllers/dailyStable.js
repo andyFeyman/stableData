@@ -93,7 +93,6 @@ export const runTask =  async function(){
             
           }
         }
-
         return (dailData);
       }
 
