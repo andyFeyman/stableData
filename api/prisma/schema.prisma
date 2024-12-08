@@ -32,3 +32,15 @@ model DailyStable {
 }
 
 
+model L2Static {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  l2Name String
+  l2ExplorerLink String
+  currentTransaction  Int
+  transactionUpdateTime DateTime
+  tpsNum Int
+  tpsUpdateTime DateTime
+  gasCost Float
+  gasCostUpdateTime DateTime
+  
+}
