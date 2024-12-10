@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import puppeteerExtra from 'puppeteer-extra';
 
@@ -12,9 +11,6 @@ function tpsFilter(tpsText){
         console.log("didn't get tps num");
     }
 }
-
-//const prisma = new PrismaClient();
-
 
 // 1. 使用 stealth 插件
 puppeteerExtra.use(StealthPlugin());
@@ -55,8 +51,9 @@ const tpsLinks = [
 ];
 
 const l2NameList = ['arb','base','op','blast','zks','linea'];
+const tpsObject = {};
 
-const processingPromises = pageList.map(async(item,index)=>{
+export const processingPromises = pageList.map(async(item,index)=>{
     //item.setDefaultNavigationTimeout(30000);
     if(index<4){
         const selector = '#ContentPlaceHolder1_mainboxes > div > div.col-md-6.col-lg-4.border-md-start > div:nth-child(2) > div.text-end > span';
@@ -68,7 +65,9 @@ const processingPromises = pageList.map(async(item,index)=>{
             const tpsText = await item.$eval(selector, element => element.textContent);
     
             const tpsNum = tpsFilter(tpsText);
-    
+            
+            tpsObject[l2NameList[index]] = tpsNum;
+
             console.log(`${l2NameList[index]}`,tpsNum);
         } catch (error) {
             console.error(`Error navigating to ${tpsLinks[index]}:`, error);
@@ -84,7 +83,9 @@ const processingPromises = pageList.map(async(item,index)=>{
             const tpsText = await item.$eval(selector2, element => element.textContent);
     
             const tpsNum = tpsFilter(tpsText);
-    
+            
+            tpsObject[l2NameList[index]] = tpsNum;
+
             console.log(`${l2NameList[index]}`,tpsNum);
             
         } catch (error) {
@@ -95,27 +96,12 @@ const processingPromises = pageList.map(async(item,index)=>{
 });
 
 await Promise.all(processingPromises);
+
+if(Object.keys(tpsObject).length === 6){
+    console.log(tpsObject);
+    console.log("tpsObject cook done!");
+}
+
 await browser.close();
 
 
-
-function getYesterdayTimestamp() {
-    const today = new Date();
-    today.setDate(today.getDate() - 1);
-    today.setHours(8, 0, 0);
-    // 使用 Math.floor() 将毫秒时间戳向下取整为秒级整数
-    const timestamp = Math.floor(today.getTime() / 1000); 
-  
-    return timestamp;
-}
-
-// get arb transactions of yesterday
-
-
-
-
-
-
-// const getALlTps = ()=>{
-    
-// }

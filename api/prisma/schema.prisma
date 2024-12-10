@@ -34,6 +34,7 @@ model DailyStable {
 
 model L2Static {
   id String @id @default(auto())  @map("_id") @db.ObjectId
+  l2IconImg String
   l2Name String
   l2ExplorerLink String
   currentTransaction  Int
