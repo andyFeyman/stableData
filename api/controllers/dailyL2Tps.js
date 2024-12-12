@@ -53,55 +53,61 @@ const tpsLinks = [
 const l2NameList = ['arb','base','op','blast','zks','linea'];
 const tpsObject = {};
 
-export const processingPromises = pageList.map(async(item,index)=>{
-    //item.setDefaultNavigationTimeout(30000);
-    if(index<4){
-        const selector = '#ContentPlaceHolder1_mainboxes > div > div.col-md-6.col-lg-4.border-md-start > div:nth-child(2) > div.text-end > span';
-        try {           
-            await item.goto(tpsLinks[index],{
-                waitUntil: 'networkidle2',
-            });
-            await item.waitForSelector(selector);
-            const tpsText = await item.$eval(selector, element => element.textContent);
+export async function getL2DailyTps(){
+
+    const processingPromises = pageList.map(async(item,index)=>{
+        //item.setDefaultNavigationTimeout(30000);
+        if(index<4){
+            const selector = '#ContentPlaceHolder1_mainboxes > div > div.col-md-6.col-lg-4.border-md-start > div:nth-child(2) > div.text-end > span';
+            try {           
+                await item.goto(tpsLinks[index],{
+                    waitUntil: 'networkidle2',
+                });
+                await item.waitForSelector(selector);
+                const tpsText = await item.$eval(selector, element => element.textContent);
+        
+                const tpsNum = tpsFilter(tpsText);
+                
+                tpsObject[l2NameList[index]] = tpsNum;
     
-            const tpsNum = tpsFilter(tpsText);
-            
-            tpsObject[l2NameList[index]] = tpsNum;
-
-            console.log(`${l2NameList[index]}`,tpsNum);
-        } catch (error) {
-            console.error(`Error navigating to ${tpsLinks[index]}:`, error);
-        }
-
-    }else{
-        const selector2 = '#ContentPlaceHolder1_mainboxes > div > div.col-md-6.col-lg-4.border-md-start > div:nth-child(2) > div.flex-grow-1 > span';
-        try {
-            await item.goto(tpsLinks[index],{
-                waitUntil: 'networkidle2',
-            });
-            await item.waitForSelector(selector2);
-            const tpsText = await item.$eval(selector2, element => element.textContent);
+                //console.log(`${l2NameList[index]}`,tpsNum);
+            } catch (error) {
+                console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+            }
     
-            const tpsNum = tpsFilter(tpsText);
-            
-            tpsObject[l2NameList[index]] = tpsNum;
-
-            console.log(`${l2NameList[index]}`,tpsNum);
-            
-        } catch (error) {
-            console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+        }else{
+            const selector2 = '#ContentPlaceHolder1_mainboxes > div > div.col-md-6.col-lg-4.border-md-start > div:nth-child(2) > div.flex-grow-1 > span';
+            try {
+                await item.goto(tpsLinks[index],{
+                    waitUntil: 'networkidle2',
+                });
+                await item.waitForSelector(selector2);
+                const tpsText = await item.$eval(selector2, element => element.textContent);
+        
+                const tpsNum = tpsFilter(tpsText);
+                
+                tpsObject[l2NameList[index]] = tpsNum;
+    
+                //console.log(`${l2NameList[index]}`,tpsNum);
+                
+            } catch (error) {
+                console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+            }
         }
+        
+    });
+    
+    await Promise.all(processingPromises);
+    
+    if(Object.keys(tpsObject).length === 6){
+        //console.log(tpsObject);
+        console.log("tpsObject cook done!");
+        await browser.close();
+        return(tpsObject);
     }
-    
-});
+};
 
-await Promise.all(processingPromises);
+//getL2DailyTps();
 
-if(Object.keys(tpsObject).length === 6){
-    console.log(tpsObject);
-    console.log("tpsObject cook done!");
-}
-
-await browser.close();
 
 

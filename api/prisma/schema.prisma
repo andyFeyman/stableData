@@ -23,7 +23,7 @@ model StableATH {
 
 model DailyStable {
   id String @id @default(auto())  @map("_id") @db.ObjectId
-  createdAt  DateTime 
+  createdAt  DateTime @default(now())
   volume BigInt
   marketCap BigInt
   volMarketCapRatio String
@@ -32,16 +32,27 @@ model DailyStable {
 }
 
 
-model L2Static {
+model L2DailyData {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  updateTime DateTime @default(now())
+  dailyTransaction  Json
+  tpsNum Json
+  gasCost Json
+}
+
+
+model L2BasicData {
   id String @id @default(auto())  @map("_id") @db.ObjectId
   l2IconImg String
-  l2Name String
-  l2ExplorerLink String
-  currentTransaction  Int
-  transactionUpdateTime DateTime
-  tpsNum Int
-  tpsUpdateTime DateTime
-  gasCost Float
-  gasCostUpdateTime DateTime
-  
+  l2Name L2Name
+  l2ExplorerLink String []
+}
+
+enum L2Name{
+  Arbitrum
+  Base
+  Optimistic
+  Blast
+  Zksync
+  Linea
 }

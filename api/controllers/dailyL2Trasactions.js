@@ -35,70 +35,78 @@ function getTransactionStr(str){
     }
 }
 
-// launch browser
-// 使用 stealth 插件
-puppeteerExtra.use(StealthPlugin());
-
-// 2. 启动配置
-const browser = await puppeteerExtra.launch({
-headless: false, // 设为 false 更容易通过检测
-args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-infobars',
-    '--window-position=0,0',
-    '--ignore-certifcate-errors',
-    '--ignore-certifcate-errors-spki-list',
-    '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-]
-});
-
-const ArbPage = await browser.newPage();
-const BasePage = await browser.newPage();
-const OpPage = await browser.newPage();
-const BlasePage = await browser.newPage();
-
-const ZkPage = await browser.newPage();
-const LineaPage = await browser.newPage();
-
-const pageList=[
-    ArbPage,BasePage,OpPage,BlasePage,ZkPage,LineaPage
-];
-
-const yesterdayStamp = getYesterdayTimestamp();
-
-const l2NameList = ['arb','base','op','blast','zks','linea'];
-
-const transactionObject = {};
-
-export const processingPromises = pageList.map(async(item,index)=>{
-        //item.setDefaultNavigationTimeout(30000);
-        const selector = '#ContentPlaceHolder1_divDataInfo > div > div:nth-child(1) > span';
-        try {           
-            await item.goto(explorerLinks[index]+"txs?dt="+yesterdayStamp,{
-                waitUntil: 'networkidle2',
-            });
-            await item.waitForSelector(selector);
-            const transactionNumStr = await item.$eval(selector, element => element.textContent);
-
-            const transactionNum = getTransactionStr(transactionNumStr);
-
-            transactionObject[l2NameList[index]] = transactionNum;
-
-            console.log(`${l2NameList[index]}`,transactionNum);
 
 
-        } catch (error) {
-            console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+
+export async function getL2DailyTrans() {
+    // launch browser
+    // 使用 stealth 插件
+    puppeteerExtra.use(StealthPlugin());
+    
+    // 2. 启动配置
+    const browser = await puppeteerExtra.launch({
+    headless: false, // 设为 false 更容易通过检测
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-infobars',
+        '--window-position=0,0',
+        '--ignore-certifcate-errors',
+        '--ignore-certifcate-errors-spki-list',
+        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    ]
+    });
+    
+    const ArbPage = await browser.newPage();
+    const BasePage = await browser.newPage();
+    const OpPage = await browser.newPage();
+    const BlasePage = await browser.newPage();
+    
+    const ZkPage = await browser.newPage();
+    const LineaPage = await browser.newPage();
+    
+    const pageList=[
+        ArbPage,BasePage,OpPage,BlasePage,ZkPage,LineaPage
+    ];
+    
+    const yesterdayStamp = getYesterdayTimestamp();
+    
+    const l2NameList = ['arb','base','op','blast','zks','linea'];
+    
+    const transactionObject = {};
+    
+    const processingPromises = pageList.map(async(item,index)=>{
+            //item.setDefaultNavigationTimeout(30000);
+            const selector = '#ContentPlaceHolder1_divDataInfo > div > div:nth-child(1) > span';
+            try {           
+                await item.goto(explorerLinks[index]+"txs?dt="+yesterdayStamp,{
+                    waitUntil: 'networkidle2',
+                });
+                await item.waitForSelector(selector);
+                const transactionNumStr = await item.$eval(selector, element => element.textContent);
+    
+                const transactionNum = getTransactionStr(transactionNumStr);
+    
+                transactionObject[l2NameList[index]] = transactionNum;
+    
+                console.log(`${l2NameList[index]}`,transactionNum);
+    
+    
+            } catch (error) {
+                console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+            }
         }
+    );
+    
+    await Promise.all(processingPromises);
+    
+    if(Object.keys(transactionObject).length === 6){
+        //console.log(transactionObject);
+        console.log("transactionObject cook done!");
+        await browser.close();
+        return (transactionObject);
     }
-);
 
-await Promise.all(processingPromises);
-
-if(Object.keys(transactionObject).length === 6){
-    console.log(transactionObject);
-    console.log("transactionObject cook done!");
 }
 
-await browser.close();
+//getL2DailyTrans();

@@ -1,6 +1,5 @@
 import cron from 'node-cron';
 import { PrismaClient } from '@prisma/client';
-import axios from 'axios';
 import moment from "moment";
 import { CMAPIRequest } from '../lib/apiRequest.js';
 
@@ -22,11 +21,11 @@ console.log("stableATHVolume :",stableATHVolume);
 
 export const runTask =  async function(){
     try {
-      console.log('开始执行定时任务...');
+      console.log('开始执行任务...');
       // 请求外部API
       const response = await CMAPIRequest.get('/v1/global-metrics/quotes/latest');
       
-      console.log(response);
+      //console.log(response);
       //需要response.data才能取到响应体的数据
       //用toString()+BigInt()+number()的原因:
       // BigInt 不能直接与小数进行运算
@@ -42,24 +41,24 @@ export const runTask =  async function(){
         const stablecoinMarketCap = BigInt(marketCapStr.split('.')[0]);
         const stablecoinVolume24h = BigInt(volumeStr.split('.')[0]);
 
-        console.log("this is stablecoinMarketCap: "+stablecoinMarketCap,typeof(stablecoinMarketCap));
-        console.log("this is stablecoinVolume24h: "+stablecoinVolume24h,typeof(stablecoinVolume24h));
+        // console.log("this is stablecoinMarketCap: "+stablecoinMarketCap,typeof(stablecoinMarketCap));
+        // console.log("this is stablecoinVolume24h: "+stablecoinVolume24h,typeof(stablecoinVolume24h));
         
         const createdAt = response.data.status.timestamp;
 
-        console.log("this is createdAt: "+createdAt,typeof(createdAt));
+        //console.log("this is createdAt: "+createdAt,typeof(createdAt));
 
         const volMarketCapRatio = ((Number(stablecoinVolume24h)/Number(stablecoinMarketCap))*100).toFixed(2) + '%';
-        console.log("this is volMarketCapRatio: "+volMarketCapRatio,typeof(volMarketCapRatio));
+        //console.log("this is volMarketCapRatio: "+volMarketCapRatio,typeof(volMarketCapRatio));
 
         const dailyVolumeWithATH = ((Number(stablecoinVolume24h)/Number(stableATHVolume))*100).toFixed(2)+"%";
-        console.log("this is dailyVolumeWithATH: "+dailyVolumeWithATH,typeof(dailyVolumeWithATH));
+        //console.log("this is dailyVolumeWithATH: "+dailyVolumeWithATH,typeof(dailyVolumeWithATH));
 
 
         const daysFromATH = moment(createdAt).diff(moment(stableATHData.createdAt),"days");
-        console.log("this is daysFromATH: "+daysFromATH,typeof(daysFromATH));
+        //console.log("this is daysFromATH: "+daysFromATH,typeof(daysFromATH));
 
-        const dailData = {
+        const dailyData = {
           createdAt: createdAt,
           volume: stablecoinVolume24h,
           marketCap: stablecoinMarketCap,
@@ -70,11 +69,11 @@ export const runTask =  async function(){
 
         // 更新数据库
         await prisma.dailyStable.create({
-          data: dailData
+          data: dailyData
         });
 
       
-        console.log('日常数据更新成功');
+        console.log('日常Stable数据更新成功:',dailyData);
 
         // 更新ATH记录
         if(stablecoinVolume24h > stableATHVolume){
@@ -93,14 +92,20 @@ export const runTask =  async function(){
             
           }
         }
-        return (dailData);
+
+        return (dailyData);
       }
 
     } catch (error) {
-      console.error('定时任务执行失败:', error);
+      console.error('任务执行失败:', error);
     }
   };
 
+export async function getDailyStable(){
+  await runTask();
+}
+
+//getDailyStable();
 
 // cron.schedule('*/1 * * * *', async()=>{
 //     await runTask();
