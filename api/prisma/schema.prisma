@@ -40,11 +40,11 @@ model L2DailyData {
   gasCost Json
 }
 
-
+//l2Name 必须是唯一的
 model L2BasicData {
   id String @id @default(auto())  @map("_id") @db.ObjectId
   l2IconImg String
-  l2Name L2Name
+  l2Name L2Name @unique
   l2ExplorerLink String []
 }
 

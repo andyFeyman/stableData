@@ -6,6 +6,7 @@ import FlowPage from './pages/FlowPage';
 import DashboardLayoutBasic from './pages/ToolPad';
 import ChainLayout from './pages/ChainLayout';
 import L2CardsList from './components/L2CardsList';
+import { l2DataLoader,stableLoader } from './lib/loaders';
 import StableCoinPage from './pages/StablecoinPage';
 import TinyPage from './pages/TinyPage';
 
@@ -41,11 +42,13 @@ export default function App() {
       children:[
         {
           path:"/l2explorer",
-          element:<L2CardsList />
+          element:<L2CardsList />,
+          loader:l2DataLoader,
         },
         {
           path:"/stablecoin",
-          element:<StableCoinPage />
+          element:<StableCoinPage />,
+          loader:stableLoader,
         },
       ]
     },

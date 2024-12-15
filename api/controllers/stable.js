@@ -59,3 +59,34 @@ export const getStableATH = async(req,res)=>{
 
 
 // get daily stable
+//BigInt参数无法直接返回，所以要toString()
+export const getDailyStableData = async(req,res)=>{
+    try {
+        const dailyData = await prisma.dailyStable.findFirst({
+            orderBy:{
+                createdAt:"desc",
+            }
+        });
+
+        if(dailyData){
+            const volStr = dailyData.volume.toString();
+            const mkcStr = dailyData.marketCap.toString();
+
+            const dailyDataStr = {
+                ...dailyData,
+                volume:volStr,
+                marketCap:mkcStr
+            }
+
+            res.status(200).json(dailyDataStr);
+
+        }else{
+            res.status(500).json({message:"dail data don't exist"});
+            
+        };
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+};

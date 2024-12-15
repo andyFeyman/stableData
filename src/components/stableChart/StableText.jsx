@@ -1,23 +1,42 @@
 import { Stack } from "react-bootstrap";
 import Badge from 'react-bootstrap/Badge';
 
-function StableText(){
+function StableText({daily,ath}){
     return(
         <div>
+            <Stack>
+                <h5>    
+                    Stable ATH Data:
+                </h5>
+                <h6>
+                    Stable ATH happened at <Badge bg="success">{ath.createdAt}</Badge>
+                </h6>
+                <h6>
+                    The TVL are <Badge bg="success">{ath.volume}</Badge>USD
+                </h6>
+                <h6>
+                    ATH TVL/CAP <Badge bg="success">{ath.volMarketCapRatio}</Badge>
+                </h6>
+            </Stack>
             <Stack gap={5} className="mt-5 pt-4">
                 <h4>
-                <Badge bg="success">2024-11-2</Badge>的TVL 到达ATH 的 <Badge bg="success">10%</Badge>
+                Updated Time: <Badge bg="success">{daily.createdAt}</Badge>
                 </h4>
                 <h4>
-                    距离ATH 已经过去  <Badge bg="success">622</Badge>天
+                    from ATH Date already Pass <Badge bg="success">{daily.daysFromATH}</Badge>Days
                 </h4>
-
                 <h4>
-                    今年的最高TVL是 <Badge bg="success">$ 2,323,123,123</Badge>
-                    
+                    Stable TVL Today:<Badge bg="success">{daily.volume}</Badge>USD
                 </h4>
-                <h6>.......发生在<Badge bg="secondary">2024-2-1.</Badge></h6>
+                <h4>
+                Stable  TVL/CAP Rate:  <Badge bg="success">{daily.volMarketCapRatio}</Badge>
+                </h4>
+                <h4>
+                Today TVL / Tvl Of ATH Rate:  <Badge bg="success">{daily.dailyVolumeWithATH}</Badge>
+                </h4>
+                
             </Stack>
+            
         </div>
     )
 

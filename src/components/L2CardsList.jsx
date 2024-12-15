@@ -1,19 +1,34 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import L2Cards from './L2Cards';
+import {Await, useLoaderData} from 'react-router-dom';
+import { Suspense } from "react";
 
 function L2CardsList(){
-
-    const data= [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+    //const data= [null,null,null,null,null,null]
+    const l2Data = useLoaderData();
+    console.log(l2Data.l2DataRespone.data);
+    //console.log(l2Data.l2DataRespone.data[0].l2Name);
     return(
        <Container className='mt-4'>
+            <h4>updated time:{l2Data.l2DataRespone.data[0].updateTime}</h4> 
             {/* 遍历数据，生成一行一行的Grid结构 */}
             <Row  className="gy-2 mb-3 py-2">
-                {data.map((item, index) => (
-                    <Col  md={6} lg={3} key={index}>
-                        <L2Cards />
-                    </Col>
-                ))}
+            {l2Data.l2DataRespone.data.map((item)=>(
+                <Col  md={6} lg={3} key={item.id}>
+                    <Suspense fallback={<p>loading posts data</p>}>
+                        <Await
+                            resolve={l2Data.l2DataRespone}
+                            errorElement={<p>Error loading posts!</p>}
+                        >
+                            {(l2DataRespone)=>                              
+                                    <L2Cards key={item.id} l2Item ={item}/>
+                            }
+                        </Await>
+                    </Suspense>
+                    {/* <L2Cards /> */}
+                </Col>
+            ))}
             </Row>
             
        </Container>
