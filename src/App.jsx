@@ -13,29 +13,29 @@ import TinyPage from './pages/TinyPage';
 export default function App() {
 
   const router = createBrowserRouter([
-    {
-      path:"/",
-      element:<Layout />,
-      children:[
-        {
-          path:"/dashboard",
-          element:<DashboardPage/>
-        },
-        {
-          path:"/box",
-          element:<BoxPratice />
-        },
-        {
-          path:"/flow",
-          element:<FlowPage/>
-        },
+    // {
+    //   path:"/",
+    //   element:<Layout />,
+    //   children:[
+    //     {
+    //       path:"/dashboard",
+    //       element:<DashboardPage/>
+    //     },
+    //     {
+    //       path:"/box",
+    //       element:<BoxPratice />
+    //     },
+    //     {
+    //       path:"/flow",
+    //       element:<FlowPage/>
+    //     },
 
-      ]
-    },
-    {
-      path:"/toolPad",
-      element:<DashboardLayoutBasic />
-    },
+    //   ]
+    // },
+    // {
+    //   path:"/toolPad",
+    //   element:<DashboardLayoutBasic />
+    // },
     {
       path:"/",
       element:<ChainLayout />,
@@ -52,10 +52,10 @@ export default function App() {
         },
       ]
     },
-    {
-      path:"/tiny",
-      element:<TinyPage />
-    },
+    // {
+    //   path:"/tiny",
+    //   element:<TinyPage />
+    // },
 
   ]);
 

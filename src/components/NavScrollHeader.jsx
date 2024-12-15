@@ -4,11 +4,15 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 function NavScrollHeader() {
   
   return (
+    
     <Navbar expand="lg" className="bg-body-tertiary sticky-top" >
+
       <Container fluid className='py-1 fs-6  bg-opacity-75 bg-custom-green'>
         <Navbar.Brand className='me-4' href="#">Crypto Smithy</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -20,7 +24,7 @@ function NavScrollHeader() {
           >
             <Nav.Link  href="/l2explorer">L2 Explorer</Nav.Link>
             <Nav.Link href="/stablecoin">StableCoin ATH</Nav.Link>
-            <NavDropdown title="Indicator" id="navbarScrollingDropdown">
+            {/* <NavDropdown title="Indicator" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">BTC Signal</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 L1 Signal
@@ -29,9 +33,9 @@ function NavScrollHeader() {
               <NavDropdown.Item href="#action5">
                 Meme Signal
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
-          <Form className="d-flex">
+          {/* <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Search"
@@ -39,7 +43,7 @@ function NavScrollHeader() {
               aria-label="Search"
             />
             <Button variant="outline-success">Search</Button>
-          </Form>
+          </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
