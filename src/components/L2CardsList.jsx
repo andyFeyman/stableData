@@ -7,7 +7,7 @@ import { Suspense } from "react";
 function L2CardsList(){
     //const data= [null,null,null,null,null,null]
     const l2Data = useLoaderData();
-    console.log(l2Data.l2DataRespone.data);
+    //console.log(l2Data.l2DataRespone.data);
     //console.log(l2Data.l2DataRespone.data[0].l2Name);
     return(
        <Container className='mt-4'>
@@ -22,7 +22,7 @@ function L2CardsList(){
                             errorElement={<p>Error loading posts!</p>}
                         >
                             {(l2DataRespone)=>                              
-                                    <L2Cards key={item.id} l2Item ={item}/>
+                                <L2Cards key={item.id} l2Item ={item}/>
                             }
                         </Await>
                     </Suspense>

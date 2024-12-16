@@ -107,6 +107,4 @@ export async function getDailyStable(){
 
 //getDailyStable();
 
-// cron.schedule('*/1 * * * *', async()=>{
-//     await runTask();
-// });
+

@@ -21,7 +21,7 @@ const tpsObject = await getL2DailyTps();
 //     tpsNum Json
 //     gasCost Json
 //   }
-async function saveDailyData() {
+export async function saveDailyData() {
 
     if(gasCostObject && transactionObject && tpsObject){
     

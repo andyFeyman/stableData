@@ -6,8 +6,6 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 function L2Cards({l2Item}) {
 
-  
-
   return (
 
     <Card  className='cardBox'>
@@ -21,7 +19,7 @@ function L2Cards({l2Item}) {
       <Card.Body className="cardBody">
         <ListGroup >
           <ListGroup.Item className="cardListGroup">
-            Transactions: <h6>{l2Item.dailyTransaction}</h6>
+            Transactions Of Yesterday: <h6>{l2Item.dailyTransaction}</h6>
             {/* <span>updated time:{l2Item.updateTime}</span> */}
           </ListGroup.Item>
           <ListGroup.Item className="cardListGroup">
@@ -33,7 +31,10 @@ function L2Cards({l2Item}) {
             {/* <span>updated time:{l2Item.updateTime}</span> */}
           </ListGroup.Item>
         </ListGroup>
-        <Button className="cardButton"><a href={l2Item.l2ExplorerLink}> Explorer</a><OpenInNewIcon className="OpenInNewIcon"/></Button>
+        <Button className="cardButton">
+          <a href={l2Item.l2ExplorerLink} target="_blank" rel="noopener noreferrer"> Explorer</a>
+          <OpenInNewIcon className="OpenInNewIcon"/>
+        </Button>
       </Card.Body>
     </Card>
   );

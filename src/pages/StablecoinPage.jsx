@@ -31,11 +31,7 @@ function StableCoinPage(){
                 </Col>
             </Row>
 
-            <Row className="justify-content-center">
-                <Col md={8}>
-
-                </Col>
-            </Row>
+        
   
         </Container>
  
