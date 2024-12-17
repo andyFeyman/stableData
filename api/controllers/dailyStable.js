@@ -105,6 +105,6 @@ export async function getDailyStable(){
   await runTask();
 }
 
-//getDailyStable();
+getDailyStable();
 
 
