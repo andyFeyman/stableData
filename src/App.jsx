@@ -10,10 +10,27 @@ import { l2DataLoader,stableLoader } from './lib/loaders';
 import StableCoinPage from './pages/StablecoinPage';
 import TinyPage from './pages/TinyPage';
 
+
 export default function App() {
 
   const router = createBrowserRouter([
-    // {
+    {
+      path:"/",
+      element:<ChainLayout />,
+      children:[
+        {
+          path:"/l2explorer",
+          element:<L2CardsList />,
+          loader:l2DataLoader,
+        },
+        {
+          path:"/stablecoin",
+          element:<StableCoinPage />,
+          loader:stableLoader,
+        },
+      ]
+    },
+      // {
     //   path:"/",
     //   element:<Layout />,
     //   children:[
@@ -36,22 +53,6 @@ export default function App() {
     //   path:"/toolPad",
     //   element:<DashboardLayoutBasic />
     // },
-    {
-      path:"/",
-      element:<ChainLayout />,
-      children:[
-        {
-          path:"/l2explorer",
-          element:<L2CardsList />,
-          loader:l2DataLoader,
-        },
-        {
-          path:"/stablecoin",
-          element:<StableCoinPage />,
-          loader:stableLoader,
-        },
-      ]
-    },
     // {
     //   path:"/tiny",
     //   element:<TinyPage />

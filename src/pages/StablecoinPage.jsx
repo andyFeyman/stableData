@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import StableChart from "../components/stableChart/stableChart";
-import StableText from "../components/stableChart/StableText";
-import {Await,useLoaderData} from "react-router-dom";
-import { Suspense } from "react";
+import StableChart from "../components/stableChart/stableChart.jsx";
+import StableText from "../components/stableChart/StableText.jsx";
+import {useLoaderData} from "react-router-dom";
+
 
 function StableCoinPage(){
 

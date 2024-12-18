@@ -6,6 +6,7 @@ import App from './App';
 import theme from './theme';
 import "./main.scss"
 
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
