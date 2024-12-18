@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import StableChart from "../components/stableChart/stableChart.jsx";
+//import StableChart from "../components/stableChart/stableChart.jsx";
 import StableText from "../components/stableChart/StableText.jsx";
 import {useLoaderData} from "react-router-dom";
 
@@ -24,7 +24,7 @@ function StableCoinPage(){
             <Row className="justify-content-center">
             
                 <Col md={3}>
-                    <StableChart />
+                    {/* <StableChart /> */}
                 </Col>
                 <Col md={5}>
                     <StableText daily={dailyData} ath={athData}/>
