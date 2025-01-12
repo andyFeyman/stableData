@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 设置 html 和 body 的高度为 100% */
+html, body {
+    height: 100%;
+};
+

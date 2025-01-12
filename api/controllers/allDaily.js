@@ -32,7 +32,7 @@ export async function saveDailyData() {
         try {
             const dailyStableData = await getDailyStable();
 
-            const newDailyL2Data = await prisma.l2DailyData.create({
+            newDailyL2Data = await prisma.l2DailyData.create({
                 data:{
                     dailyTransaction:transactionObject,
                     tpsNum:tpsObject,
@@ -42,15 +42,16 @@ export async function saveDailyData() {
 
             console.log("日常L2数据更新成功:");
             
-            console.log(newDailyL2Data,dailyStableData);
-    
-            return (newDailyL2Data,dailyStableData);
+            console.log({newDailyL2Data,dailyStableData});
+            //要返回多个值，应该使用对象:
+            return {newDailyL2Data,dailyStableData};
 
         } catch (error) {
             console.log(error);
         }; 
     }else{
         console.log("daily data didn't prepared!");
+        return null;
     };
     
 

@@ -88,7 +88,7 @@ export const runTask =  async function(){
               }
             })
           } catch (error) {
-            console.log("new ATH created fail: "+error);
+            console.log("new ATH created fail: "+error.message);
             
           }
         }
@@ -97,7 +97,7 @@ export const runTask =  async function(){
       }
 
     } catch (error) {
-      console.error('任务执行失败:', error);
+      console.error('任务执行失败:', error.message);
     }
   };
 

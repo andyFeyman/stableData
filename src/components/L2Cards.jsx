@@ -2,7 +2,6 @@ import "./L2Cards.scss"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 function L2Cards({l2Item}) {
 
@@ -33,7 +32,7 @@ function L2Cards({l2Item}) {
         </ListGroup>
         <Button className="cardButton">
           <a href={l2Item.l2ExplorerLink} target="_blank" rel="noopener noreferrer"> Explorer</a>
-          <OpenInNewIcon className="OpenInNewIcon"/>
+     
         </Button>
       </Card.Body>
     </Card>

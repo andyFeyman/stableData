@@ -5,13 +5,14 @@ import {Await, useLoaderData} from 'react-router-dom';
 import { Suspense } from "react";
 
 function L2CardsList(){
-    //const data= [null,null,null,null,null,null]
+
     const l2Data = useLoaderData();
     //console.log(l2Data.l2DataRespone.data);
     //console.log(l2Data.l2DataRespone.data[0].l2Name);
     return(
        <Container className='mt-4'>
-            <h4>updated time:{l2Data.l2DataRespone.data[0].updateTime}</h4> 
+            <h4>Updated time:{new Date(l2Data.l2DataRespone.data[0].updateTime).toLocaleString()} </h4> 
+            
             {/* 遍历数据，生成一行一行的Grid结构 */}
             <Row  className="gy-2 mb-3 py-2">
             {l2Data.l2DataRespone.data.map((item)=>(
