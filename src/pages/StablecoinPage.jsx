@@ -13,21 +13,32 @@ function StableCoinPage(){
     const athData = stableData.stableATH.data;
     
     return(
-        <Container fluid>
-            <Row className="justify-content-center mt-4 text-center">
-                <Col md={4}>
-                    <h2>ATH VS Daily</h2>
-                </Col>
-                
-            </Row>
-            <Row className="justify-content-center mb-4">
-                <Col md={8}>
+        <div className="container-fluid">
+            <div className="flex flex-col items-center mt-4 ">
+                <div className="text-center mb-4">
+                    <h2>Daily Vs ATH</h2>
+                </div>
+                {/* 移除 Bootstrap Row/Col, 使用 Tailwind 类 */}
+                <div className="mx-auto max-w-4xl px-4 ">
                     <StableText daily={dailyData} ath={athData}/>
-                </Col>
+                </div>
+            </div>
+        </div>
+        // <Container fluid>
+        //     <Row className="justify-content-center mt-4 text-center">
+        //         <Col md={4}>
+        //             <h2>ATH VS Daily</h2>
+        //         </Col>
+                
+        //     </Row>
+        //     <Row className="justify-content-center mb-4">
+        //         <Col md={8}>
+        //             <StableText daily={dailyData} ath={athData}/>
+        //         </Col>
 
-            </Row>
+        //     </Row>
 
-        </Container>
+        // </Container>
  
     )
 }

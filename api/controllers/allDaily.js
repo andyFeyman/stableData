@@ -52,6 +52,7 @@ export async function saveDailyData() {
     }else{
         console.log("daily data didn't prepared!");
         return null;
+      
     };
     
 

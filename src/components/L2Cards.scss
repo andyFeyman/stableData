@@ -1,7 +1,7 @@
 .cardBox{
     width: 16rem;
     display: flex;
-    background-color: #A0D683;
+    background-color: #F8FAFC;
     color: black;
 
     .top{
@@ -38,7 +38,7 @@
         text-align: center;
         
         .cardListGroup{
-            background-color: #D3EE98;
+            background-color: #D9EAFD;
             margin-bottom: 10px;
             font-size:small;
             &:hover {
@@ -48,7 +48,7 @@
         }
     
         .cardButton{
-            background-color: #72BF78;
+            background-color: #F8FAFC;
             color: black;
             font-size: medium;
             font-weight: 800;
