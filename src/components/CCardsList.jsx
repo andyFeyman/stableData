@@ -10,18 +10,18 @@ function CCardsList(){
     //console.log(l2Data.l2DataRespone.data);
     //console.log(l2Data.l2DataRespone.data[0].l2Name);
     return(
-        <div className="overflow-x-auto mt-6">
+        <div className="overflow-x-auto mt-6 ">
             <h4 className='mx-4 mt-4'>Updated time:{new Date(l2Data.l2DataRespone.data[0].updateTime).toLocaleString()} </h4> 
-            <table className="table table-md mx-4 ">
+            <table className="table w-8/12 mx-4">
                 {/* head */}
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Transactions Of Yesterday</th>
-                    <th>Current TPS</th>
-                    <th>Average Gas Cost</th>
-                    <th>Explorer</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Transactions Of Yesterday</th>
+                        <th>Current TPS</th>
+                        <th>Average Gas Cost</th>
+                        <th>Explorer</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {l2Data.l2DataRespone.data.map((item)=>(
@@ -40,13 +40,13 @@ function CCardsList(){
                 </tbody>
                 {/* foot */}
                 <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Transactions Of Yesterday</th>
-                    <th>Current TPS</th>
-                    <th>Average Gas Cost</th>
-                    <th>Explorer</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Transactions Of Yesterday</th>
+                        <th>Current TPS</th>
+                        <th>Average Gas Cost</th>
+                        <th>Explorer</th>
+                    </tr>
                 </tfoot>
             </table>
         </div> 

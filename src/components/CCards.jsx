@@ -6,7 +6,7 @@ const CCards = ({l2Item}) => {
             <td>
                 <div className="flex items-center gap-3">
                     <div className="avatar">
-                    <div className="mask mask-squircle h-14 w-14">
+                    <div className="mask mask-squircle h-10 w-10">
                         <img
                             className="h-6 w-6"
                             src={l2Item.l2IconImg}
