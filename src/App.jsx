@@ -1,6 +1,5 @@
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
-import L2CardsList from './components/L2CardsList';
-import CCardsList from './components/CCardsList';
+import L2DataPage from './pages/L2DataPage';
 import ChainLayout from './pages/ChainLayout';
 import HomePage from "./components/HomePage"
 import { l2DataLoader,stableLoader } from './lib/loaders';
@@ -22,7 +21,7 @@ export default function App() {
         },
         {
           path:"/l2explorer",
-          element:<CCardsList />,
+          element:<L2DataPage />,
           loader:l2DataLoader,
         },
         {

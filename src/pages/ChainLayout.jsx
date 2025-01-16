@@ -1,9 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet,useLocation } from "react-router-dom";
 import Footer from "../components/Footer"
+import { useState } from "react";
 
 function ChainLayout() {
+
+  const [displayChecked, setDisplayChecked] = useState(true);
+  const location = useLocation();
+
+  // 只在 /l2explorer 路由显示切换按钮
+  const isL2ExplorerRoute = location.pathname === "/l2explorer";
+
+  
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <div className="flex flex-col justify-between min-h-screen mx-4">
       <div className="drawer ">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -24,19 +33,22 @@ function ChainLayout() {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost text-xl">Crypto Smithy</a></div>
+            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost text-xl">Crypto WholeView</a></div>
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
                 <li><a href="/l2explorer" className="btn btn-ghost text-xl">Explorer </a></li>
                 <li><a href="/stablecoin" className="btn btn-ghost text-xl">StableCoin ATH</a></li>
+  
               </ul>
             </div>
           </div>
           {/* Page content here */}
-          <Outlet/>
+          <Outlet context={{ displayChecked }}/>
+
+       
         </div>
-        
+
         <div className="drawer-side">
           <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 min-h-full w-60 p-6">
@@ -46,7 +58,18 @@ function ChainLayout() {
           </ul>
         </div>
       </div>
-      <Footer />
+      {isL2ExplorerRoute && ( // 只在 /l2explorer 路由显示切换按钮
+        <div className="flex justify-end mx-4">
+          Change Display
+          <input
+            type="checkbox"
+            className="toggle"
+            onClick={() => setDisplayChecked(!displayChecked)}
+            defaultChecked={displayChecked}
+          />
+        </div>
+      )}
+      <Footer />  
     </div>
   );
 }
