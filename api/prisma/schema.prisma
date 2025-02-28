@@ -38,6 +38,8 @@ model L2DailyData {
   dailyTransaction  Json
   tpsNum Json
   gasCost Json
+
+  @@index([updateTime]) // Add index on updateTime
 }
 
 //l2Name 必须是唯一的
@@ -48,6 +50,38 @@ model L2BasicData {
   l2ExplorerLink String []
 }
 
+model L1DailyData {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  updateTime DateTime @default(now()) 
+  l1Name L1Name
+  dailyTransaction  String @default("null")
+  tpsNum String @default("null")
+  gasCost String  @default("null")
+
+  @@index([updateTime]) // Add index on updateTime
+}
+
+model L1BasicData {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  l1Img String
+  l1Name L1Name @unique
+  l1ExplorerLink String 
+}
+
+enum L1Name{
+  Bitcoin
+  Ethereum
+  Solana
+  Binance
+  Dogecoin
+  Avalanche
+  Sui
+  Ton 
+  Near
+  Mantle
+  Kaspa
+}
+
 enum L2Name{
   Arbitrum
   Base
@@ -56,3 +90,4 @@ enum L2Name{
   Zksync
   Linea
 }
+

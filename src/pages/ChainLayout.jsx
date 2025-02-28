@@ -4,15 +4,15 @@ import { useState } from "react";
 
 function ChainLayout() {
 
-  const [displayChecked, setDisplayChecked] = useState(true);
-  const location = useLocation();
+  //const [displayChecked, setDisplayChecked] = useState(true);
+  //const location = useLocation();
 
   // 只在 /l2explorer 路由显示切换按钮
-  const isL2ExplorerRoute = location.pathname === "/l2explorer";
+  //const isL2ExplorerRoute = location.pathname === "/l2explorer";
 
   
   return (
-    <div className="flex flex-col justify-between min-h-screen mx-4">
+    <div className="flex flex-col justify-between min-h-screen mx-1">
       <div className="drawer ">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -33,18 +33,19 @@ function ChainLayout() {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost text-xl">Crypto WholeView</a></div>
-            <div className="hidden flex-none lg:block">
+            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost"><h5>ChainMonitor</h5></a></div>
+            <div className="">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
-                <li><a href="/l2explorer" className="btn btn-ghost text-xl">Explorer </a></li>
-                <li><a href="/stablecoin" className="btn btn-ghost text-xl">StableCoin ATH</a></li>
-  
+                <li><a href="/l2explorer" className="btn btn-ghost text-xl"><h5>Chains Explorer</h5> </a></li>
+                <li><a href="/stablecoin" className="btn btn-ghost text-xl"><h5>StableCoin Data</h5></a></li>
               </ul>
             </div>
           </div>
           {/* Page content here */}
-          <Outlet context={{ displayChecked }}/>
+          {/* <Outlet context={{ displayChecked }}/> */}
+
+            <Outlet />
 
        
         </div>
@@ -58,7 +59,7 @@ function ChainLayout() {
           </ul>
         </div>
       </div>
-      {isL2ExplorerRoute && ( // 只在 /l2explorer 路由显示切换按钮
+      {/* {isL2ExplorerRoute && ( // 只在 /l2explorer 路由显示切换按钮
         <div className="flex justify-end mx-4">
           Change Display
           <input
@@ -68,7 +69,7 @@ function ChainLayout() {
             defaultChecked={displayChecked}
           />
         </div>
-      )}
+      )} */}
       <Footer />  
     </div>
   );

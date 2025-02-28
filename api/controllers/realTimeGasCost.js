@@ -43,6 +43,7 @@ puppeteerExtra.use(StealthPlugin());
 
 //2. 启动配置
 const browser = await puppeteerExtra.launch({
+
 headless: "new", // 设为 false 更容易通过检测
 args: [
     '--no-sandbox',

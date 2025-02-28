@@ -5,8 +5,6 @@
     .tooltip {
         z-index: 1; // 确保 tooltip 显示在最上层
         visibility: hidden;
-        width: 200px;
-        height: 600px;
         background-color: rgba(0, 0, 0, 0.8);
         color: #fff;
         text-align: center;

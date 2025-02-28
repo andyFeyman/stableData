@@ -112,14 +112,19 @@ export const getCombinedL2Data  =  async(req,res)=>{
       };
     
     try {
-        const dailyData = await prisma.l2DailyData.findFirst({
-            orderBy:{
-                updateTime:"desc"
-            }
-        });
+
+        const [dailyData,basicData] = await Promise.all([
+            prisma.l2DailyData.findFirst({orderBy:{updateTime:"desc"}}),
+            prisma.l2BasicData.findMany({}),
+        ]);
+        // const dailyData = await prisma.l2DailyData.findFirst({
+        //     orderBy:{
+        //         updateTime:"desc"
+        //     }
+        // });
         //console.dir(dailyData);
         
-        const basicData = await prisma.l2BasicData.findMany({});
+        //const basicData = await prisma.l2BasicData.findMany({});
         //console.dir(basicData);
     
         const result = basicData.map(item => {

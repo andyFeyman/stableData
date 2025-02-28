@@ -12,7 +12,7 @@ function L2CardsList(){
 
     return(
        <Container className='mt-4 h-9/12'>
-            <h4>Updated time:{new Date(l2Data?.l2DataRespone.data[0].updateTime).toLocaleString()} </h4> 
+            <h4>Updated:{new Date(l2Data?.l2DataRespone.data[0].updateTime).toLocaleString()} </h4> 
             
             {/* 遍历数据，生成一行一行的Grid结构 */}
             <Row  className="gy-2 mb-3 py-2">
