@@ -7,7 +7,7 @@ axiosRetry(axios, {
     retryDelay: (retryCount) => { retryCount * 1000 },
     retryCondition: (error) => {
         // if http status code: 401，then retry
-        if (error.response || error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
             console.log("Received 401, retrying...");
             return true;
         }
@@ -16,29 +16,7 @@ axiosRetry(axios, {
     },
 });
 
-// function getYesterdayDateFormatted() {
-//     const today = new Date();
-//     const yesterday = new Date(today); // 克隆 today 对象，避免修改 today
-//     yesterday.setDate(today.getDate() - 1); // 减去一天
 
-//     const year = yesterday.getFullYear();
-//     const month = String(yesterday.getMonth() + 1).padStart(2, '0');
-//     const day = String(yesterday.getDate()).padStart(2, '0');
-
-//     return `${year}-${month}-${day}`;
-// }
-
-//if visit this API---->401, maybe you are just in the wrong region, use proxy to fix this.
-// const burnFeeUrl = 'https://avascan.info/api/private/evm/43114/aggregations/burned-fees?ecosystem=avalanche';
-
-// function getDailyFeeUrl() {
-//     const yesterDay = getYesterdayDateFormatted();
-//     const yesterDayStr = `&dateFrom=${yesterDay}+00%3A00%3A00&dateTo=${yesterDay}+00%3A00%3A00`;
-//     const wholeFeeUrl = burnFeeUrl + yesterDayStr;
-//     //console.log("wholeFeeUrl:", wholeFeeUrl);
-//     return wholeFeeUrl;
-
-// }
 
 function formatNumber(str) {
     // 1. 将字符串转换为 BigInt 类型，避免超出 JavaScript Number 的精度范围
@@ -65,7 +43,7 @@ function formatNumber(str) {
 
 async function avaxPlugin(item) {
     try {
-        const tranRespone = await axios.get(item.tranUrl);
+        const tranRespone = await axios.get(item.tranUrl,{ timeout: 10000 });
         const data = tranRespone.data;
         // 检查数据是否是一个数组，并且至少有2个元素
         if (!Array.isArray(data) || data.length < 2) {
@@ -85,7 +63,7 @@ async function avaxPlugin(item) {
 
         //计算gasCost 
         //const wholeFeeUrl = getDailyFeeUrl();
-        const gasResponse = await axios.get(item.gasUrl);
+        const gasResponse = await axios.get(item.gasUrl,{ timeout: 10000 });
         const bigNumGasFeeStr = gasResponse.data[1][1];
         //console.log("bigNumGasFeeStr:", bigNumGasFeeStr);
         const totalGasFee = formatNumber(bigNumGasFeeStr);

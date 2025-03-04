@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser()); 
 app.use(cors({origin:process.env.CLIENT_URL, credentials:true}));
+app.use(cors({origin:process.env.CLIENT2_UR, credentials:true}));
 
 app.use("/api/stable",stableRoute);
 app.use("/api/l2",l2DataRoute);

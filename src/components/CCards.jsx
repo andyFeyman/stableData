@@ -3,7 +3,7 @@ import React from 'react';
 const CCards = ({l2Item}) => {
     return (
         <tr>
-            <td>
+            <td className="px-2 py-1 md:px-4 md:py-3">
                 <div className="flex items-center gap-3">
                     <div className="avatar">
                     <div className="mask mask-squircle h-10 w-10">
@@ -20,19 +20,19 @@ const CCards = ({l2Item}) => {
                     </div>
                 </div>
             </td>
-            <td>
+            <td className="px-2 py-1 md:px-4 md:py-3">
                 {(l2Item.dailyTransaction).toLocaleString()}
                 <br />
                 {/* <span className="text-sm opacity-50">Desktop </span> */}
             </td>
-            <td>
+            <td className="px-2 py-1 md:px-4 md:py-3">
                 {l2Item.tpsNum}
             </td>
-            <td>
+            <td className="px-2 py-1 md:px-4 md:py-3">
                 {l2Item.gasCost}$
             </td>
-            <th>
-                <a href={l2Item.l2ExplorerLink} target="_blank" rel="noopener noreferrer"> Explorer</a>
+            <th className="px-2 py-1 md:px-4 md:py-3">
+                <a href={l2Item.l2ExplorerLink} target="_blank" rel="noopener noreferrer"> Go</a>
             </th>
         </tr>
     )};

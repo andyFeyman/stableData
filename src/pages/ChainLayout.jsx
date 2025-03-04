@@ -12,7 +12,7 @@ function ChainLayout() {
 
   
   return (
-    <div className="flex flex-col justify-between min-h-screen mx-1">
+    <div className="flex flex-col justify-between min-h-screen ">
       <div className="drawer ">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -33,21 +33,20 @@ function ChainLayout() {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost"><h5>ChainMonitor</h5></a></div>
+            <div className="mx-2 flex-1 px-2"><a href="/" role="button" className="btn btn-ghost"><h4>ChainMonitor</h4></a></div>
             <div className="">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
-                <li><a href="/l2explorer" className="btn btn-ghost text-xl"><h5>Chains Explorer</h5> </a></li>
+                <li><a href="/chainExplorers" className="btn btn-ghost text-xl"><h5>Chains Explorer</h5> </a></li>
                 <li><a href="/stablecoin" className="btn btn-ghost text-xl"><h5>StableCoin Data</h5></a></li>
               </ul>
             </div>
           </div>
           {/* Page content here */}
           {/* <Outlet context={{ displayChecked }}/> */}
-
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
             <Outlet />
-
-       
+          </div>    
         </div>
 
         <div className="drawer-side">

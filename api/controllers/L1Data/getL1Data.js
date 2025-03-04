@@ -23,6 +23,7 @@ puppeteerExtra.use(StealthPlugin());
 
 const browserConfig = {
     headless: false,
+   // headless: "new",
     defaultViewport: null,
     args: [
         '--start-maximized',
@@ -86,7 +87,7 @@ async function l1DataRunner() {
         const expectedCount = results.length; // 預期插入的記錄數
 
         if (savedCount === expectedCount) {
-            console.log(`all completed successfully`);
+            console.log(`all completed successfully at ${new Date().toLocaleString()}`);
             console.log("Number of L1 DailyData created:", savedCount);
         }else{
             console.log({
@@ -96,29 +97,6 @@ async function l1DataRunner() {
                 savedCount: savedCount,
             });
         }
-
-        // results.forEach(async(result, index) => {
-        //     //console.log(result,typeof(result));           
-        //     if (result) {
-        //         try {
-        //             const l1DailyDataSaved = await prisma.l1DailyData.create({
-        //                 data:result
-        //             });  
-
-        //         } catch (error) {
-        //             // 如果是Prisma的验证错误，返回400状态码
-        //             if (error.code === 'P2009') {
-        //                 console.log("prisma Saved Fail,error code:P2009");
-        //             }
-        //             console.log("prisma Saved error",error);
-
-        //         }   
-
-        //         console.log(`Task ${index} completed successfully`);
-        //     } else {
-        //         console.log(`Task ${index} failed or returned null`);
-        //     }
-        // });
 
     } catch (error) {
         console.error('Error in l1DataRunner:', error);

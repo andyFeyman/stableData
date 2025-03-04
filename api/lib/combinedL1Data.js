@@ -1,6 +1,6 @@
 export default function combineL1Data(dailyList, basicList) {
-    
-    const basicMap = new Map(basicList.map(item => [item.l1Name, item]));
+
+    const basicMap = new Map(basicList.map(item => [item.l1Name, item])); 
 
     return dailyList.map(itemA => {
       const sameItem = basicMap.get(itemA.l1Name);

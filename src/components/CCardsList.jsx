@@ -17,17 +17,17 @@ function CCardsList({ l2DataRespone }){
     // }
 
     return(
-        <div className="overflow-x-auto mt-6">
-            <h4 className='mx-4 mt-4'>Updated time:{new Date(l2DataRespone.data[0].updateTime).toLocaleString()} </h4> 
-            <table className="table-lg  w-9/12">
+        <div className="overflow-x-auto mt-2">
+            <h5 className='mb-2'>Updated time:{new Date(l2DataRespone.data[0].updateTime).toLocaleString()} </h5> 
+            <table className="table-lg ">
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Transactions Of Yesterday</th>
-                        <th>Current TPS</th>
-                        <th>Average Gas Cost</th>
-                        <th>Explorer</th>
+                        <th className="px-4 py-2">Name</th>
+                        <th className="px-4 py-2">Transactions Of Yesterday</th>
+                        <th className="px-4 py-2">Current TPS</th>
+                        <th className="px-4 py-2">Average Gas Cost</th>
+                        <th className="px-4 py-2">Explorer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,11 +38,11 @@ function CCardsList({ l2DataRespone }){
                 {/* foot */}
                 <tfoot>
                     <tr>
-                        <th>Name</th>
-                        <th>Transactions Of Yesterday</th>
-                        <th>Current TPS</th>
-                        <th>Average Gas Cost</th>
-                        <th>Explorer</th>
+                        <th className="px-4 py-2">Name</th>
+                        <th className="px-4 py-2">Transactions Of Yesterday</th>
+                        <th className="px-4 py-2">Current TPS</th>
+                        <th className="px-4 py-2">Average Gas Cost</th>
+                        <th className="px-4 py-2">Explorer</th>
                     </tr>
                 </tfoot>
             </table>

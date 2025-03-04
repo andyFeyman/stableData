@@ -91,3 +91,14 @@ enum L2Name{
   Linea
 }
 
+
+// model HistoryMarketData{
+//   id String @id @default(auto())  @map("_id") @db.ObjectId
+
+// }
+
+
+// model CurrentMarketVol {
+//    id String @id @default(auto())  @map("_id") @db.ObjectId
+
+// }

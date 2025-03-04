@@ -3,7 +3,7 @@ import daisyui from "daisyui"
 
 export default {
   mode: 'jit',
-  content: ['./src/**/*.{html,js,jsx,ts,tsx}','./*.{html,js,jsx}','./src/*.jsx'],
+  content: [ "./index.html",'./src/**/*.{js,jsx,ts,tsx}','./*.{html,js,jsx}','./src/*.jsx'],
   theme: {
     extend: {},
   },

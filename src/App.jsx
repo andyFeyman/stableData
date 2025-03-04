@@ -4,7 +4,7 @@ import ChainLayout from './pages/ChainLayout';
 import HomePage from "./components/HomePage"
 import {l1AndL2Loader,stableLoader} from "./lib/loaders"
 import StableCoinPage from './pages/StablecoinPage';
-
+import NotFoundPage from './pages/404page';
 
 export default function App() {
 
@@ -18,7 +18,7 @@ export default function App() {
           element:<HomePage />,
         },
         {
-          path:"/l2explorer",
+          path:"/chainExplorers",
           element:<L2DataPage />,
           loader:l1AndL2Loader,
         },
@@ -27,6 +27,10 @@ export default function App() {
           element:<StableCoinPage />,
           loader:stableLoader,
         },
+        {
+          path:"*",
+          element:<NotFoundPage />,
+        }
       ]
     }
 
