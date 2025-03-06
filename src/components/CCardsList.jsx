@@ -17,9 +17,9 @@ function CCardsList({ l2DataRespone }){
     // }
 
     return(
-        <div className="overflow-x-auto mt-2">
+        <div className="overflow-x-auto mt-2 w-9/12">
             <h6 className='mb-2 flex justify-end'>Updated time:{new Date(l2DataRespone.data.l2DailyData[0].updateTime).toLocaleString()} </h6> 
-            <table className="table-lg table-pin-rows table-pin-cols">
+            <table className="table-lg table-pin-rows table-pin-cols w-full">
                 {/* head */}
                 <thead>
                     <tr>

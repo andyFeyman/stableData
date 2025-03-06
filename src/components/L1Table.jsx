@@ -3,11 +3,11 @@ import L1Threads from './L1Threads';
 
 function L1Table({ l1DailyRespone }) {
   return (
-    <div className="overflow-x-auto mt-2">
+    <div className="overflow-x-auto mt-2 w-9/12">
       <h6 className="mb-2 flex justify-end">
         Updated: {new Date(l1DailyRespone.data[0]?.updateTime).toLocaleString()}
       </h6>
-      <table className="table-lg table-pin-rows table-pin-cols">
+      <table className="table-lg table-pin-rows table-pin-cols w-full">
         <thead>
           <tr>
             <th className="px-4 py-2">Name</th>

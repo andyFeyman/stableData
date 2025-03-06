@@ -12,7 +12,7 @@ function ChainLayout() {
 
   
   return (
-    <div className="flex flex-col justify-between min-h-screen ">
+    <div className="w-full flex flex-col justify-between min-h-screen ">
       <div className="drawer ">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">

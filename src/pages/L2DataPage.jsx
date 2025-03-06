@@ -9,7 +9,7 @@ export default function L2DataPage() {
   const data = useLoaderData();
 
   return (
-    <div className="w-full py-6 bg-gray-100">
+    <div className="w-full py-6  flex flex-col items-center">
       {/* Parent container for centering */}
       <Helmet>
         <title>all main chain explorer</title>
@@ -28,7 +28,7 @@ export default function L2DataPage() {
           errorElement={<div>Error loading page data!</div>}
         >
           {([l1DailyRespone, l2DataRespone]) => (
-            <div className="max-w-screen-xl flex flex-col items-center px-4">
+            <div className="max-w-screen-xl w-full  px-4">
               {/* Content container */}
               <div className="divider divider-neutral text-xl mt-4  text-center">
                 L1 Daily Data
