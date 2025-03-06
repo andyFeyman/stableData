@@ -18,20 +18,20 @@ function CCardsList({ l2DataRespone }){
 
     return(
         <div className="overflow-x-auto mt-2">
-            <h5 className='mb-2'>Updated time:{new Date(l2DataRespone.data[0].updateTime).toLocaleString()} </h5> 
-            <table className="table-lg ">
+            <h6 className='mb-2 flex justify-end'>Updated time:{new Date(l2DataRespone.data.l2DailyData[0].updateTime).toLocaleString()} </h6> 
+            <table className="table-lg table-pin-rows table-pin-cols">
                 {/* head */}
                 <thead>
                     <tr>
                         <th className="px-4 py-2">Name</th>
-                        <th className="px-4 py-2">Transactions Of Yesterday</th>
+                        <th className="px-4 py-2">Txs Of Yesterday</th>
                         <th className="px-4 py-2">Current TPS</th>
-                        <th className="px-4 py-2">Average Gas Cost</th>
+                        <th className="px-4 py-2">Average Txs Cost</th>
                         <th className="px-4 py-2">Explorer</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {l2DataRespone.data.map((item)=>(                                                    
+                    {l2DataRespone.data.l2DailyData.map((item)=>(                                                    
                         <CCards key={item.id} l2Item ={item} />                                                   
                     ))}              
                 </tbody>
@@ -39,9 +39,9 @@ function CCardsList({ l2DataRespone }){
                 <tfoot>
                     <tr>
                         <th className="px-4 py-2">Name</th>
-                        <th className="px-4 py-2">Transactions Of Yesterday</th>
+                        <th className="px-4 py-2">Txs Of Yesterday</th>
                         <th className="px-4 py-2">Current TPS</th>
-                        <th className="px-4 py-2">Average Gas Cost</th>
+                        <th className="px-4 py-2">Average Txs Cost</th>
                         <th className="px-4 py-2">Explorer</th>
                     </tr>
                 </tfoot>

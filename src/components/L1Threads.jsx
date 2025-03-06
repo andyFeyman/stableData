@@ -19,12 +19,12 @@ const L1Threads = ({ l1Item }) => {
           </div>
         </div>
       </td>
-      <td className="px-2 py-1 ">
+      <td className="px-2 py-1 text-center">
         {Number(l1Item.dailyTransaction).toLocaleString()}
       </td>
-      <td className="px-2 py-1 ">{l1Item.tpsNum}</td>
-      <td className="px-2 py-1 ">{l1Item.gasCost}$</td>
-      <th className="px-2 py-1 ">
+      <td className="px-2 py-1 text-center">{l1Item.tpsNum}</td>
+      <td className="px-2 py-1 text-center">{l1Item.gasCost}$</td>
+      <th className="px-2 py-1 text-center">
         <a href={l1Item.l1ExplorerLink} target="_blank" rel="noopener noreferrer">
           Go
         </a>

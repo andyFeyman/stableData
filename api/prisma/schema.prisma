@@ -50,6 +50,13 @@ model L2BasicData {
   l2ExplorerLink String []
 }
 
+model L2CombinedData {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  updateTime DateTime @default(now())
+  l2DailyData Json
+  @@index([updateTime])
+}
+
 model L1DailyData {
   id String @id @default(auto())  @map("_id") @db.ObjectId
   updateTime DateTime @default(now()) 

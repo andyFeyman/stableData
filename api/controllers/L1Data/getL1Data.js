@@ -71,13 +71,19 @@ async function l1DataRunner() {
 
         if (results.length !== 11) {
             console.log("L1 DailyData incomplete!");
-            return ("L1 DailyData incomplete!", results);
+            return ("L1 DailyData incomplete! tasklist::", results);
         }
         // 处理结果
+        const currentUTCTime = new Date().toISOString();//获取当前UTC时间
+        //创建个了修改updateTime为UTC时间的新list
+        const dataToInsert = results.map(item =>({
+            ...item,
+            updateTime: currentUTCTime,
+        }));
         //解構賦值[promiseResult]
         const [promiseResult] = await prisma.$transaction([
             prisma.l1DailyData.createMany({
-                data: results.map(item => (item)),
+                data: dataToInsert,
             })
         ]);
         console.log();

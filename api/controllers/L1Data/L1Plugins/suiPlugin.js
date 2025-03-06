@@ -1,4 +1,4 @@
-import {suiApiRequest} from '../../../lib/apiRequest.js'
+import {suiApiRequest} from "../../../lib/apiRequest.js";
 
 async function fetchWithDelay(url, delay) {
   return new Promise((resolve, reject) => {
@@ -52,10 +52,22 @@ async function suiPlugin() {
       });
     } else {
       console.log(' SUI Chain dailyData failed:', transStr, tpsStr, suiGasCostStr);
+      return ({
+        "l1Name":"Sui",
+        "dailyTransaction":"null",
+        "tpsNum":"null",
+        "gasCost":"null",
+      });
     }
 
   } catch (error) {
     console.log('sui dailyData launch failed::', error);
+    return ({
+      "l1Name":"Sui",
+      "dailyTransaction":"null",
+      "tpsNum":"null",
+      "gasCost":"null",
+    });
   }
 }
 

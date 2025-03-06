@@ -43,6 +43,12 @@ async function btcPlugin(page,item) {
             });
          }else{
              console.log('btc dailyData failed:',btcTransStr,btcTpsStr,btcGasCostStr);
+             return ({
+                "l1Name":item.name,
+                "dailyTransaction":"null",
+                "tpsNum":"null",
+                "gasCost":"null",
+            })
          }
 
 

@@ -4,16 +4,16 @@ import L1Threads from './L1Threads';
 function L1Table({ l1DailyRespone }) {
   return (
     <div className="overflow-x-auto mt-2">
-      <h5 className="mb-2">
+      <h6 className="mb-2 flex justify-end">
         Updated: {new Date(l1DailyRespone.data[0]?.updateTime).toLocaleString()}
-      </h5>
-      <table className="table-lg w-full border-collapse">
+      </h6>
+      <table className="table-lg table-pin-rows table-pin-cols">
         <thead>
           <tr>
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Transactions Of Yesterday</th>
+            <th className="px-4 py-2">Txs Of Yesterday</th>
             <th className="px-4 py-2">Average TPS Of 24H</th>
-            <th className="px-4 py-2">Average Gas Cost</th>
+            <th className="px-4 py-2">Average Txs Cost</th>
             <th className="px-4 py-2">Explorer</th>
           </tr>
         </thead>
@@ -25,9 +25,9 @@ function L1Table({ l1DailyRespone }) {
         <tfoot>
           <tr>
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Transactions Of Yesterday</th>
+            <th className="px-4 py-2">Txs Of Yesterday</th>
             <th className="px-4 py-2">Average TPS Of 24H</th>
-            <th className="px-4 py-2">Average Gas Cost</th>
+            <th className="px-4 py-2">Average Txs Cost</th>
             <th className="px-4 py-2">Explorer</th>
           </tr>
         </tfoot>

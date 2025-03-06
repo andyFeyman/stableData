@@ -3,6 +3,8 @@ import {getL2DailyTrans} from './dailyL2Trasactions.js';
 import {getGasCost} from './realTimeGasCost.js';
 import {getDailyStable} from './dailyStable.js';
 import { PrismaClient } from '@prisma/client';
+import { getCombinedL2Data } from './l2DailyData.js';
+import inkPlugin from './NewL2Data/ink.js';
 
 const prisma = new PrismaClient();
 
@@ -54,8 +56,38 @@ export async function saveDailyData() {
         return null;
       
     };
-    
 
 };
 
-await saveDailyData();
+// Save json data to  db
+export async function saveDailyL2DataToJson() {
+
+    try {
+       const firstResult = await saveDailyData();
+        const l2List  = await getCombinedL2Data();
+        const inkData = await inkPlugin();
+        l2List.push(inkData);
+        //console.log(l2List);
+        // Sort the L2 dataList
+        l2List.sort((a,b) => b.dailyTransaction - a.dailyTransaction);
+
+        const saveDB = await prisma.l2CombinedData.create({
+            data:{
+                l2DailyData:l2List,
+            }
+        });
+
+        if(saveDB){
+            console.log("日常L2数据更新成功:",saveDB);
+        }else{
+            console.log(error);
+        }
+
+    } catch (error) {
+
+        console.log("daily data didn't prepared!");
+        return null;
+    }
+};
+
+await saveDailyL2DataToJson();

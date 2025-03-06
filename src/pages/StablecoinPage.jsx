@@ -16,7 +16,7 @@ function StableCoinPage(){
                 <meta name="description" content="Analyze stablecoin market data,stablecoin comparison, track daily volume, historical highs, and compare with traditional assets like stocks and bonds. provides professional data analysis to help you assess stablecoin investment risks and opportunities." />
                 <meta name="keywords" content="stablecoin comparison,Cryptocurrency, stablecoin volume ratio,stablecoin market cap,Trading Volume, TPS, Fees, Blockchain, Bitcoin, Ethereum, Stablecoin, USDT, USDC, Stocks, Bonds, Market Analysis" />
             </Helmet>
-            <Suspense fallback={<div>Loading Stablecoin page data...</div>}>
+            <Suspense fallback={<span className="mx-auto loading loading-spinner loading-xl "></span>}>
                 <Await 
                     resolve={Promise.all([stableData.stableResponse, stableData.stableATH])}
                     errorElement={<div>Error loading Stablecoin data!</div>}

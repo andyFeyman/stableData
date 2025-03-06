@@ -21,7 +21,7 @@ export const CMAPIRequest = axios.create({
 export const baseApiRequest = axios.create({
     baseURL:"https://api.basescan.org",
     withCredentials:true,
-    timeout: 3000,
+    timeout: 6000,
     headers:{'Accept': 'application/json'},
 });
 

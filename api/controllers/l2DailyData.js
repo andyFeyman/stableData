@@ -117,15 +117,7 @@ export const getCombinedL2Data  =  async(req,res)=>{
             prisma.l2DailyData.findFirst({orderBy:{updateTime:"desc"}}),
             prisma.l2BasicData.findMany({}),
         ]);
-        // const dailyData = await prisma.l2DailyData.findFirst({
-        //     orderBy:{
-        //         updateTime:"desc"
-        //     }
-        // });
-        //console.dir(dailyData);
-        
-        //const basicData = await prisma.l2BasicData.findMany({});
-        //console.dir(basicData);
+      
     
         const result = basicData.map(item => {
             // 找到对应的key
@@ -142,16 +134,39 @@ export const getCombinedL2Data  =  async(req,res)=>{
                 dailyTransaction: dailyData.dailyTransaction[key]
               };
             }
-            
             return item;
-          });
-    
+        });
+
+        //wait for logger
         if(result){
-            res.status(200).json(result);
+            //res.status(200).json(result);
+            return(result);
+       
         }else{
             res.status(400).json({message:"don't get combined data."});
         };
         
+    } catch (error) {
+        console.log(error);
+        
+    }
+};
+
+
+// get L2 Daily Json
+export const getL2DailyJson = async(req,res)=>{
+
+    try {
+        const DBResult = await prisma.l2CombinedData.findFirst(
+            {orderBy:{
+                updateTime:"desc"
+            }}
+        );
+        if(DBResult){
+            res.status(200).json(DBResult);
+        }else{
+            res.status(404).json({message:"notthing fund!"});
+        }
     } catch (error) {
         console.log(error);
         

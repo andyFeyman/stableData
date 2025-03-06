@@ -22,7 +22,7 @@ export default function L2DataPage() {
           content="Cryptocurrency, all chain explorer,blockchain explorer list,Trading Volume, TPS, Fees, Blockchain, Bitcoin, Ethereum, Stablecoin, USDT, USDC, Stocks, Bonds, Market Analysis"
         />
       </Helmet>
-      <Suspense fallback={<div>Loading page data...</div>}>
+      <Suspense fallback={<span className="mx-auto loading loading-spinner loading-xl "></span>}>
         <Await
           resolve={Promise.all([data.l1DailyRespone, data.l2DataRespone])}
           errorElement={<div>Error loading page data!</div>}

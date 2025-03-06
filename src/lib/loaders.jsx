@@ -4,7 +4,7 @@ import apiRequest from "./apiRequest.js";
 export const l1AndL2Loader = async()=>{
     try {
         return defer({                         
-            l2DataRespone : apiRequest('/l2/combinedL2Data'), // 未解析的 Promise
+            l2DataRespone : apiRequest('/l2/l2DailyJson'), // 未解析的 Promise
             l1DailyRespone : apiRequest('/l1/getL1DailyData'), // 未解析的 Promise
         })
     } catch (error) {
@@ -16,10 +16,10 @@ export const l1AndL2Loader = async()=>{
 export const stableLoader = async()=>{
     try {
         // const stablePromise = await apiRequest("/stable/getDailyStable");
-        // const stableATHPromise = await apiRequest("/stable/getStableATH");
+        // 请求内容不能加 await, 不然返回结果不是Promise
         return defer({
-            stableResponse: await apiRequest("/stable/getDailyStable"),
-            stableATH: await apiRequest("/stable/getStableATH"),
+            stableResponse: apiRequest("/stable/getDailyStable"),
+            stableATH:  apiRequest("/stable/getStableATH"),
         })
     } catch (error) {
         console.dir(error);
