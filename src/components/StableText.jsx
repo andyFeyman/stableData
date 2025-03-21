@@ -51,7 +51,7 @@ function StableText({ daily, ath }) {
           </div>
         </div>
       </div>
-      <h2 className="card-title my-3">Stablecoin ATH Data</h2>
+      <h2 className="card-title my-3">Stablecoin Volume's ATH Data</h2>
       <div className={statsContainerClass}>
         <div className="stat">
           <div className="stat-title">VOL Of ATH</div>

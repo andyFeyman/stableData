@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage"
 import {l1AndL2Loader,stableLoader} from "./lib/loaders"
 import StableCoinPage from './pages/StablecoinPage';
 import NotFoundPage from './pages/404page';
+import Btc4Years from './pages/Btc4Years';
 
 export default function App() {
 
@@ -26,6 +27,14 @@ export default function App() {
           path:"/stablecoin",
           element:<StableCoinPage />,
           loader:stableLoader,
+        },
+        {
+          path:"/btc4years",
+          element:<Btc4Years />
+        },
+        {
+          path:"/btc4years",
+          element:<Btc4Years />
         },
         {
           path:"*",

@@ -10,7 +10,7 @@ const L1Threads = ({ l1Item }) => {
               <img
                 className="h-6 w-6"
                 src={l1Item.l1Img}
-                alt="Chain Icon"
+                alt={l1Item.l1Name+'Chain Icon'}
               />
             </div>
           </div>

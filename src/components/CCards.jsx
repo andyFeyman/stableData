@@ -10,7 +10,7 @@ const CCards = ({l2Item}) => {
                         <img
                             className="h-6 w-6"
                             src={l2Item.l2IconImg}
-                            alt="Chain Icon" 
+                            alt="Etherum L2 Icon" 
                         />
                     </div>
                     </div>
