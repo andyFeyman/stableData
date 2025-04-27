@@ -26,7 +26,7 @@ const CCards = ({l2Item}) => {
                 {/* <span className="text-sm opacity-50">Desktop </span> */}
             </td>
             <td className="px-2 py-1 text-center">
-                {l2Item.tpsNum}
+                {l2Item.tpsNum ===null? "null" : l2Item.tpsNum}
             </td>
             <td className="px-2 py-1 text-center">
                 {l2Item.gasCost}$

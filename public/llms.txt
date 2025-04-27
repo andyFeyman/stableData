@@ -1,0 +1,11 @@
+# ChainMonitor
+
+>: Tracking Cryptocurrency Key Metrics
+
+## Core Content
+- [Bitcoin 4-year cycle](https://chainmonitor.xyz/btc4years): Bitcoin's 4-year halving cycle, historical all-time highs (ATH)
+- [BTC Compare](https://chainmonitor.xyz/btcCompare): Bitcoin Compared to Stock Market: Performance & Trends
+- [Cryptocurrency L1 and L2](https://chainmonitor.xyz/chainExplorers): Track real-time cryptocurrency trading data, including daily volume, TPS 
+- [Stablecoin](https://chainmonitor.xyz/stablecoin): Stablecoin market data,stablecoin comparison, track daily volume, historical highs
+
+

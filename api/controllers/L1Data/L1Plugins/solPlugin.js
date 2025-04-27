@@ -15,16 +15,12 @@ async function solPlugin(page,item) {
 
         const tpsStr = tpsNum.toString();
 
-        //console.log(transStr,tpsStr);
-        
+        //console.log(transStr,tpsStr);     
        //通过正则提取价格
         const priceString = await page.$eval(item.priceSelector, el => {return el.innerText.match(/\$(\d+\.?\d*)/)?.[1] || '';});
 
         const gasFeeString = await page.$eval(item.gasSelector, el => el.innerText);
         
-        // console.log("this is price:",priceString);
-        // console.log("this is gasFee:",gasFeeString);
-
         const gasCostStr = (Number(gasFeeString)*Number(priceString)).toFixed(4);
 
         if(transStr && tpsStr && gasCostStr){
@@ -40,7 +36,13 @@ async function solPlugin(page,item) {
         }
 
     } catch (error) {
-        console.log('failed:', error);
+        console.log('sol dailyData launch failed::', error);
+        return ({
+          "l1Name":"Sol",
+          "dailyTransaction":"null",
+          "tpsNum":"null",
+          "gasCost":"null",
+        });
         
     }
 }

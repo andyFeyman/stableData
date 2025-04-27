@@ -1,24 +1,59 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/Footer"
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 function ChainLayout() {
 
-  //const [displayChecked, setDisplayChecked] = useState(true);
-  //const location = useLocation();
+  const location = useLocation();
+  const { currentUser, updateUser } = useContext(AuthContext);
+  //console.log(currentUser);
 
-  // 只在 /l2explorer 路由显示切换按钮
-  //const isL2ExplorerRoute = location.pathname === "/l2explorer";
+  const loginRedirectPath = `/login?redirect=${encodeURIComponent(location.pathname)}`;
 
+  const handleLogout = async () => {
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/logout`,
+      {},
+      { withCredentials: true }
+    );
+    updateUser(null);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+
+    const isValid = async () => {
+      try {
+        await axios.get(
+          `${import.meta.env.VITE_API_URL}/session`,
+          { withCredentials: true },
+        );
+        if (isValid.status === 401) {
+          updateUser(null);
+        } else {
+          console.log("session valid!");
+        }
+        
+      } catch (error) {
+        updateUser(null);
+        console.log("session invalid!");
+      }
+    }
+    isValid();
+
+  }, [currentUser]);
 
   return (
-    <div className="drawer w-full flex flex-col justify-between min-h-screen">
+    <div className="drawer w-full flex flex-col justify-between min-h-screen bg-base-100">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col ">
         {/* <!-- Navbar --> */}
-        <div className="navbar bg-base-300 w-full">
+        {/* ADDED: fixed top-0 z-10 */}
+        <div className="navbar fixed bg-base-300 w-full fixed top-0 z-10">
           <div className="flex-none lg:hidden">
-            <label for="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
+            <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -37,45 +72,75 @@ function ChainLayout() {
             <ul className="menu menu-horizontal p-2">
               {/* <!-- Navbar menu content here --> */}
 
-              <div className="dropdown dropdown-bottom text-center">
+              {/* ADDED: dropdown-hover */}
+              <div className="dropdown dropdown-bottom text-center dropdown-hover">
                 <div tabIndex={0} role="button" className="btn btn-ghost text-xl pt-2 "><h5>Bitcoin Data ↓</h5> </div>
-                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-58 p-1 shadow-sm ">
                   <li><a className="btn btn-ghost bg-gray-700" href="/btc4years">bitcoin 4 year cycle</a></li>
-                  <li><a className="btn btn-ghost bg-gray-700" href="/btcCompare"> bitcoin compare</a></li>
+                  <li><a className="btn btn-ghost bg-gray-700" href="/btcCompare"> Bitcoin vs. Stock Market</a></li>
                 </ul>
               </div>
 
 
               <li><a href="/chainExplorers" className="btn btn-ghost text-xl"><h5>Chains Explorer</h5> </a></li>
               <li><a href="/stablecoin" className="btn btn-ghost text-xl"><h5>StableCoin Data</h5></a></li>
+              <li>
+                {currentUser ? (
+                  <div className="gap-2">
+                    <button> {currentUser.username}</button>|
+                    <button onClick={handleLogout}>Logout</button>|
+                    <button><a href="/reset">Reset</a> </button>
+                  </div>
+                ) : (
+                  <div>
+                    <a href={loginRedirectPath}>Login</a> | <a href="/register">Register</a>
+                  </div>
+                )}
+              </li>
+
 
             </ul>
           </div>
         </div>
         {/* Page content here */}
         {/* <Outlet context={{ displayChecked }}/> */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
+        {/* ADDED: pt-16 to push content down below the fixed navbar */}
+        <div className="container px-4 sm:px-6 lg:px-8 flex-grow pt-1">
           <Outlet />
         </div>
       </div>
       <div className="drawer-side">
-        <label for="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
           {/* <!-- Sidebar content here --> */}
-          <div className="dropdown dropdown-bottom text-center">
+          {/* ADDED: dropdown-hover (for sidebar dropdown) */}
+          <div className="dropdown dropdown-bottom text-center dropdown-hover">
             <div tabIndex={0} role="button" className="btn btn-ghost text-xl pt-2 text-center"><h5>Bitcoin Data ↓</h5> </div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-58 p-2 shadow-sm">
               <li><a className="btn btn-ghost bg-gray-700" href="/btc4years">bitcoin 4 year cycle</a></li>
-              <li><a className="btn btn-ghost bg-gray-700" href="/btcstock"> bitcoin stock market</a></li>
+              <li><a className="btn btn-ghost bg-gray-700" href="/btcCompare"> Bitcoin vs. Stock Market</a></li>
             </ul>
           </div>
           <li><a href="/chainExplorers" className="btn btn-ghost text-xl"><h5>Chains Explorer</h5> </a></li>
           <li><a href="/stablecoin" className="btn btn-ghost text-xl"><h5>StableCoin Data</h5></a></li>
+          <li>
+            {currentUser ? (
+              <div >
+                <button><p> {currentUser.username}</p></button>|
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            ) : (
+              <div>
+                <a href={loginRedirectPath}>Login</a> | <a href="/register">Register</a>
+              </div>
+            )}
+          </li>
         </ul>
       </div>
       <Footer />
     </div>
-    
+
+
   );
 }
 

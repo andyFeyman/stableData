@@ -1,4 +1,4 @@
-import { defineConfig,loadEnv } from 'vite';
+import { defineConfig,loadEnv,searchForWorkspaceRoot } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 
@@ -11,13 +11,17 @@ export default defineConfig(({ mode }) => {
       react(),
     ],
     server: {
-      host: true, // 或者 '0.0.0.0'
+      host: 'localhost', // 或者 '0.0.0.0'
       proxy: {
         '/api': {
           target: 'http://localhost:8800', // 后端地址
           changeOrigin: true,
           secure: false // 如果后端是 HTTPS，可以设置为 true
         }
+      },
+      fs:{
+        allow:[searchForWorkspaceRoot(process.cwd()),'public','src','node_modules'],
+        deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**','.gitignore']
       }
     },
     define: {

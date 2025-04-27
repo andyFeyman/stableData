@@ -22,7 +22,7 @@ function L2Cards({l2Item}) {
             {/* <span>updated time:{l2Item.updateTime}</span> */}
           </ListGroup.Item>
           <ListGroup.Item className="cardListGroup">
-            Current TPS:<h6>{l2Item.tpsNum}</h6>
+            Current TPS:<h6>{(l2Item.tpsNum === null)? 0 :l2Item.tpsNum}</h6>
             {/* <span>updated time:{l2Item.updateTime}</span> */}
           </ListGroup.Item>
           <ListGroup.Item className="cardListGroup">

@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);  // 获取当前文件的绝�
 const __dirname = dirname(__filename);              // 获取当前文件所在目录
 
 //这样做的目的是确保无论从哪个目录运行代码，都能正确找到 .env 文件。
-dotenv.config({ path: join(__dirname, '../.env') });
+dotenv.config({ path: join(__dirname, '../.env.dev') });
 
 
 export const CMAPIRequest = axios.create({

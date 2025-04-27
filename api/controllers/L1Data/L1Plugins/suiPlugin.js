@@ -1,4 +1,4 @@
-import {suiApiRequest} from "../../../lib/apiRequest.js";
+import { suiApiRequest } from "../../../lib/apiRequest.js";
 
 async function fetchWithDelay(url, delay) {
   return new Promise((resolve, reject) => {
@@ -20,11 +20,11 @@ async function suiPlugin() {
 
     // 1. 获取交易数据
     const tranResponse = await fetchWithDelay('/sui/v1/widgets/total-transactions?period=DAY&size=SMALL', 0);
-    
+
     const transNum = tranResponse.data.value;
     const transStr = transNum.toString();
     console.log("suiTransStr:", transStr);
-    
+
 
     // 2. 获取TPS数据
     const tpsRespone = await fetchWithDelay('/sui/v1/widgets/tps?period=DAY&size=SMALL', delay);
@@ -45,28 +45,28 @@ async function suiPlugin() {
     if (transStr && tpsStr && suiGasCostStr) {
       console.log(`this is SUI Chain dailyData:`, transStr, tpsStr, suiGasCostStr);
       return ({
-        "l1Name":"Sui",
-        "dailyTransaction":transStr,
-        "tpsNum":tpsStr,
-        "gasCost":suiGasCostStr,
+        "l1Name": "Sui",
+        "dailyTransaction": transStr,
+        "tpsNum": tpsStr,
+        "gasCost": suiGasCostStr,
       });
     } else {
       console.log(' SUI Chain dailyData failed:', transStr, tpsStr, suiGasCostStr);
       return ({
-        "l1Name":"Sui",
-        "dailyTransaction":"null",
-        "tpsNum":"null",
-        "gasCost":"null",
+        "l1Name": "Sui",
+        "dailyTransaction": "null",
+        "tpsNum": "null",
+        "gasCost": "null",
       });
     }
 
   } catch (error) {
     console.log('sui dailyData launch failed::', error);
     return ({
-      "l1Name":"Sui",
-      "dailyTransaction":"null",
-      "tpsNum":"null",
-      "gasCost":"null",
+      "l1Name": "Sui",
+      "dailyTransaction": "null",
+      "tpsNum": "null",
+      "gasCost": "null",
     });
   }
 }

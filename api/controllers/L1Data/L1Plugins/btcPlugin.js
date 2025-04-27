@@ -3,7 +3,7 @@ async function btcPlugin(page,item) {
     try {
          //1. 获取交易数据
 
-         await page.goto(item.tranUrl,{waitUntil: 'load',timeout: 30000});
+         await page.goto(item.tranUrl,{waitUntil: 'networkidle0',timeout: 30000});
 
          console.log("logding page:",item.tranUrl);
          
@@ -44,7 +44,7 @@ async function btcPlugin(page,item) {
          }else{
              console.log('btc dailyData failed:',btcTransStr,btcTpsStr,btcGasCostStr);
              return ({
-                "l1Name":item.name,
+                "l1Name":"Bitcion Data failed",
                 "dailyTransaction":"null",
                 "tpsNum":"null",
                 "gasCost":"null",

@@ -81,6 +81,7 @@ export async function getGasCost(){
     
             await item.goto(explorerLinks[index]+"txs?ps=10",{
                 waitUntil: 'networkidle2',
+                timeout: 30000
             });
     
             for(let i =1; i<11; i++){
@@ -92,7 +93,8 @@ export async function getGasCost(){
                     const fixFloatStr = parseFloat(gasFeeStr).toFixed(8);
                     gasFeeList.push(parseFloat(fixFloatStr));
                 } catch (error) {
-                    console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+                    console.error(`gasCost of  page runing error:`, error);
+                    await browser.close();
                 }
             };
     
@@ -109,7 +111,7 @@ export async function getGasCost(){
     
                     gasCostObject[l2NameList[index]] = usdGasNum.toFixed(4); //将 格式化好的usdGasNum赋值给gasCostObject；             
                     //console.log(usdGasNum);
-                   // console.log(`${l2NameList[index]}`,usdGasNum.toFixed(4) +"USD");
+                    console.log(`${l2NameList[index]}`,usdGasNum.toFixed(4) +"USD");
                    
                 }else{
                     console.log("ethPrice don't exist!");
@@ -118,7 +120,7 @@ export async function getGasCost(){
               
             } catch (error) {
                 console.log(error);
-                
+                await browser.close();
             };
     
         }
@@ -137,4 +139,4 @@ export async function getGasCost(){
 
 }
 
-//getGasCost();
+//await getGasCost();

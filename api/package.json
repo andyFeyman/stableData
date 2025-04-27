@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:push:prd": "dotenv -e .env.prd -- npx prisma db push"
   },
   "type": "module",
   "author": "",
@@ -11,18 +12,24 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "latest",
+    "@simplewebauthn/server": "^13.1.1",
     "axios": "^1.7.7",
     "axios-retry": "^4.5.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
     "node-cron": "^3.0.3",
+    "nodemailer": "^6.10.1",
     "p-limit": "^6.2.0",
     "puppeteer": "^23.10.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
   }
 }

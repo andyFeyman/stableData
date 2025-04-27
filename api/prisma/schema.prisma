@@ -35,9 +35,9 @@ model DailyStable {
 model L2DailyData {
   id String @id @default(auto())  @map("_id") @db.ObjectId
   updateTime DateTime @default(now())
-  dailyTransaction  Json
-  tpsNum Json
-  gasCost Json
+  dailyTransaction  Json?
+  tpsNum Json?
+  gasCost Json?
 
   @@index([updateTime]) // Add index on updateTime
 }
@@ -53,7 +53,7 @@ model L2BasicData {
 model L2CombinedData {
   id String @id @default(auto())  @map("_id") @db.ObjectId
   updateTime DateTime @default(now())
-  l2DailyData Json
+  l2DailyData Json?
   @@index([updateTime])
 }
 
@@ -73,6 +73,69 @@ model L1BasicData {
   l1Img String
   l1Name L1Name @unique
   l1ExplorerLink String 
+}
+
+model latestKeyData {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  updateTime DateTime @default(now()) 
+  btcMarketCap String
+  btcMCTime String @default("null")
+  tgaBalance String
+  tgaTime String @default("null")
+  usStockVol String
+  stockTime String @default("null")
+  h41Value String
+  h41Time String @default("null")
+
+  @@index([updateTime])
+}
+
+model User {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
+  username  String     @unique
+  createdAt DateTime   @default(now())
+  credentials Credential[]
+  isVerified    Boolean      @default(false)
+  isSuperAdmin  Boolean      @default(false)
+  isVip     Boolean      @default(false)
+  failedLoginAttempts Int @default(0) // 失败尝试次数
+  lockoutUntil  DateTime? // 锁定到期时间
+}
+
+model Credential {
+  id             String    @id @map("_id")
+  userId        String    @db.ObjectId
+  user          User      @relation(fields: [userId], references: [id])
+  publicKey     String
+  counter       Int       // MongoDB 支持 Int，适合 WebAuthn counter
+  deviceName    String?
+  createdAt     DateTime  @default(now())
+}
+
+model TempUser {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  username      String
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime
+}
+
+model VerificationCode {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String
+  code          String
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime
+}
+
+model EmailAttempt {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  failedAttempts Int @default(0)
+  lockoutUntil  DateTime?
+  updatedAt     DateTime  @updatedAt
+
 }
 
 enum L1Name{

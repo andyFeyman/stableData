@@ -26,3 +26,16 @@ export const stableLoader = async()=>{
     }
 };
 
+
+export const latestKeyDataLoader = async()=>{
+    try {
+        // 请求接口不能加 await, 不然返回结果不是Promise
+        //const btcPromise = await apiRequest("/btc/latestKeyData")
+        return defer({
+            latestKeyDataResponse: apiRequest("/btc/latestKeyData"),
+        })
+    } catch (error) {
+        console.dir(error);
+    }
+};
+

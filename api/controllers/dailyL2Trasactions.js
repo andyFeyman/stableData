@@ -36,8 +36,6 @@ function getTransactionStr(str){
 }
 
 
-
-
 export async function getL2DailyTrans() {
     // launch browser
     // 使用 stealth 插件
@@ -94,6 +92,7 @@ export async function getL2DailyTrans() {
     
             } catch (error) {
                 console.error(`Error navigating to ${tpsLinks[index]}:`, error);
+                await browser.close();
             }
         }
     );

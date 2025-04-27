@@ -37,7 +37,7 @@ function Btc4Years() {
                 </section>
 
                 {/* ATH Timeline Section */}
-                <section className="mb-8">
+                <section className="mb-2 flex flex-col text-center ">
                     <div className="divider text-2xl font-bold">Bitcoin's All-Time Highs (ATH) Timeline</div>
                     <p className="mb-4 text-center">
                         Explore Bitcoin's historical price peaks throughout its 4-year cycles.

@@ -9,6 +9,8 @@ import StablecoinInfo from "../components/InfoText/StableInfo.jsx";
 function StableCoinPage(){
 
     const stableData = useLoaderData();
+    console.log(stableData);
+    
     
     return(
         <div className="w-full flex flex-col items-center">
@@ -40,24 +42,7 @@ function StableCoinPage(){
                 </Await>
             </Suspense>
             <StablecoinInfo />
-            
         </div>
-        // <Container fluid>
-        //     <Row className="justify-content-center mt-4 text-center">
-        //         <Col md={4}>
-        //             <h2>ATH VS Daily</h2>
-        //         </Col>
-                
-        //     </Row>
-        //     <Row className="justify-content-center mb-4">
-        //         <Col md={8}>
-        //             <StableText daily={dailyData} ath={athData}/>
-        //         </Col>
-
-        //     </Row>
-
-        // </Container>
- 
     )
 }
 
