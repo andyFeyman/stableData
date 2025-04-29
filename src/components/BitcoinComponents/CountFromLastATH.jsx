@@ -1,4 +1,4 @@
-import CountDownSection from './countDown.jsx';
+import CountDownSection from './CountDown.jsx';
 import { useState, useEffect } from 'react';
 
 function CountFromLastATH() {
