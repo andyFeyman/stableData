@@ -24,8 +24,22 @@ export default defineConfig(({ mode }) => {
         deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**','.gitignore']
       }
     },
+    preview: {
+      // 允许访问预览服务器的主机名列表
+      allowedHosts: [
+        'chainmonitor.xyz', // <-- 添加你的域名在这里
+        // 如果你还需要通过 localhost 或 127.0.0.1 访问这个预览服务器，也可以加上
+        // 'localhost',
+        // '127.0.0.1'
+      ],
+      // 你可能还需要配置 preview 的端口等，如果需要的话
+      // port: 5000,
+      // strictPort: true,
+    },
     define: {
-      'process.env': env
+      'process.env': Object.fromEntries(
+        Object.entries(process.env).filter(([key]) => key.startsWith('VITE_'))
+      ),
     }
   };
 });
