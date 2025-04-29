@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import AthTimeLine from "../components/BitcoinComponents/athTimeLine";
+import AthTimeLine from "../components/BitcoinComponents/AthTimeLine";
 import CountFromLastATH from "../components/BitcoinComponents/CountFromLastATH";
 
 function Btc4Years() {
