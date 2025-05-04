@@ -26,12 +26,12 @@ export const baseApiRequest = axios.create({
 });
 
 export const suiApiRequest = axios.create({
-    baseURL:"https://api.blockberry.one",
+    baseURL:"https://internal.suivision.xyz",
     withCredentials:true,
     timeout: 30000,
     headers:{
-        'Accept': '*/*',
-        'x-api-key': process.env.BLOCKBERRY_API_KEY,
+        'origin': 'https://suivision.xyz',
+        'User-Agent':"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
         },
 });
 

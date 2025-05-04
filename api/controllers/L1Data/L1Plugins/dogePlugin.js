@@ -1,15 +1,9 @@
-
 async function dogePlugin(page,item) {
     try {
         //1. 获取交易数据
-        await page.goto(item.url,{waitUntil: 'networkidle0',timeout: 30000});
+        await page.goto(item.url, {waitUntil: 'domcontentloaded',timeout: 30000});
       
-
         console.log("logding page:",item.url);
-
-        // await page.locator(item.tranSelector).wait();
-        // await page.locator(item.tpsSelector).wait();
-        //await page.locator(item.gasSelector).wait();
 
         await page.waitForSelector(item.tranSelector,{timeout: 30000});
         await page.waitForSelector(item.tpsSelector,{timeout: 30000});
@@ -41,13 +35,13 @@ async function dogePlugin(page,item) {
                 "gasCost":dogeGasCostStr,
             });
         }else{
-            console.log('btc dailyData failed:',dogeTransStr,rawDogeTps,dogeGasCostStr);
+            console.log('doge dailyData failed:',dogeTransStr,rawDogeTps,dogeGasCostStr);
+
         }
 
 
 } catch (error) {
-    console.log('browser btcPage launch failed::', error);
-    
+    console.log('browser dogePage launch failed::', error);
 }
 }
 

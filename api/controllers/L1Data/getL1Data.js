@@ -60,7 +60,7 @@ async function l1DataRunner() {
             setupPluginWithPage(browser, dogePlugin, 4),
             avaxPlugin(l1DataList[5]), // 特殊处理不需要page的插件
             setupPluginWithPage(browser, tonPlugin, 7),
-            suiPlugin(), // 特殊处理不需要page的插件
+            //suiPlugin(), // 特殊处理不需要page的插件
             nearPlugin(), // 特殊处理不需要page的插件
             setupPluginWithPage(browser, mantlePlugin, 9),
             setupPluginWithPage(browser, kasPlugin, 10)
@@ -69,7 +69,7 @@ async function l1DataRunner() {
         // 并行执行所有任务
         const results = await Promise.all(tasks);
 
-        if (results.length !== 11) {
+        if (results.length !== 10) {
             console.log("L1 DailyData incomplete!");
             return ("L1 DailyData incomplete! tasklist::", results);
         }
