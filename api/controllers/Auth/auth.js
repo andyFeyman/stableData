@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
 const rpID = process.env.RP_ID || "localhost";
 const rpName = "chainmonitor";
 const expectedOrigin =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === "prd"
     ? "https://chainmonitor.xyz"
     : "http://localhost:5173";
 

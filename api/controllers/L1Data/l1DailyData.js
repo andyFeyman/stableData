@@ -27,7 +27,7 @@ export const getL1DailyData = async (req, res) => {
         
         const finalyResult = combineL1Data(l1LatestData, basicDataList).reverse();
 
-        if (l1LatestData.length === 11) {
+        if (l1LatestData.length <= 11) {
             res.status(200).json(finalyResult);
         } else {
             console.log("the latest data doesn't update yet, here is the older data:");

@@ -16,30 +16,34 @@ async function fetchWithDelay(url, delay) {
 async function suiPlugin() {
   try {
     // 控制请求间隔时间，避免频繁请求
-    const delay = 2000; // 每个请求之间延迟2秒（2000毫秒）
+    const delay = 1000; // 每个请求之间延迟2秒（2000毫秒）
 
     // 1. 获取交易数据
-    const tranResponse = await fetchWithDelay('/sui/v1/widgets/total-transactions?period=DAY&size=SMALL', 0);
+    const tranResponse = await fetchWithDelay('/mainnet/api/statistic?type=txNum&days=14&isAccumulate=true', 0);
 
-    const transNum = tranResponse.data.value;
+    const transNum = tranResponse.data.result[13].count;
     const transStr = transNum.toString();
     console.log("suiTransStr:", transStr);
 
 
     // 2. 获取TPS数据
-    const tpsRespone = await fetchWithDelay('/sui/v1/widgets/tps?period=DAY&size=SMALL', delay);
-    const tpsNum = tpsRespone.data.value;
+   
+    const tpsNum = (transNum/86400).toFixed(2);
     const tpsStr = tpsNum.toString();
     console.log("suiTpsStr:", tpsStr);
 
     // 3. 获取Gas数据
-    const suiPriceRespone = await fetchWithDelay('/sui/v1/widgets/get-price', delay);
-    const suiAverGasRespone = await fetchWithDelay('/sui/v1/widgets/avg-fee?period=DAY&size=SMALL', delay);
+    // const suiPriceRespone = await fetchWithDelay('/mainnet/api/coin/sui',delay);
 
-    const suiPriceNum = suiPriceRespone.data.price;
-    const suiAverGas = suiAverGasRespone.data.value.toFixed(6);
-    const suiGasCost = (suiPriceNum * suiAverGas).toFixed(6);
-    const suiGasCostStr = suiGasCost.toString();
+    // const suiPriceNum = suiPriceRespone.data.price;
+    
+  
+
+    // const suiAverGasStr = suiAverGasRespone.data.result.avgGas;
+
+
+    // const suiGasCost = (suiPriceNum * suiAverGas).toFixed(6);
+    const suiGasCostStr = "null";
     console.log("suiGasCost:", suiGasCostStr);
 
     if (transStr && tpsStr && suiGasCostStr) {
