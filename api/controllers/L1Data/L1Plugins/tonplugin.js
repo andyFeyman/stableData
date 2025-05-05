@@ -1,7 +1,7 @@
 async function tonPlugin(page,item) {
     try {
         // 获取交易数据
-        await page.goto(item.tranUrl,{waitUntil: 'networkidle0',timeout: 30000});
+        await page.goto(item.tranUrl,{waitUntil: 'domcontentloaded',timeout: 30000});
         console.log("logding page:",item.tranUrl);
         
         await page.waitForSelector(item.tranSelector);
@@ -22,7 +22,7 @@ async function tonPlugin(page,item) {
         //console.log("tonGasNum: ",tonGasNum);
 
         //get price num
-        await page.goto(item.priceUrl,{waitUntil: 'networkidle0',timeout: 30000})
+        await page.goto(item.priceUrl,{waitUntil: 'domcontentloaded',timeout: 30000})
 
         await page.waitForSelector(item.priceSelector);
 
@@ -38,7 +38,7 @@ async function tonPlugin(page,item) {
         
         
         // 获取tps数据
-        await page.goto(item.tpsUrl,{waitUntil: 'networkidle0',timeout: 30000});
+        await page.goto(item.tpsUrl,{waitUntil: 'domcontentloaded',timeout: 30000});
     
         await page.waitForSelector(item.tpsSelector);
         

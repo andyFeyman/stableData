@@ -1,6 +1,8 @@
 async function dogePlugin(page,item) {
     try {
         //1. 获取交易数据
+        //domcontentloaded 它比 load 事件通常更快触发，因为它不等待所有资源的加载。
+        //networkidle0 它尝试判断页面是否已经加载了所有需要的资源, 如果用它，当遇到个别异步请求阻塞时，会导致后续代码无法运行。但它可以确保所有资源加载完毕 才执行下面代码。
         await page.goto(item.url, {waitUntil: 'domcontentloaded',timeout: 30000});
       
         console.log("logding page:",item.url);

@@ -33,7 +33,7 @@ const generateCode = () => {
 // 生成 JWT
 const generateJWT = (userId, isSuperAdmin, isVip) => {
 
-  return jwt.sign({ userId, isSuperAdmin, isVip }, process.env.JWT_SECRET, { expiresIn: "48h" });
+  return jwt.sign({ userId, isSuperAdmin, isVip }, process.env.JWT_SECRET, { expiresIn: "72h" });
 };
 
 // 注册：开始（提交邮箱和用户名）

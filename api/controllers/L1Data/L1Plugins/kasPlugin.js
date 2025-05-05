@@ -1,7 +1,7 @@
 async function kasPlugin(page,item) {
     try {
         // 获取交易数据
-        await page.goto(item.url,{waitUntil: 'networkidle0',timeout: 30000});
+        await page.goto(item.url,{waitUntil: 'domcontentloaded',timeout: 30000});
         console.log("logding page:",item.url);
         
         await page.waitForSelector(item.tranSelector);
@@ -19,7 +19,7 @@ async function kasPlugin(page,item) {
 
         // 获取gas数据  
 
-        await page.goto(item.gasUrl,{waitUntil: 'networkidle0',timeout: 30000});
+        await page.goto(item.gasUrl,{waitUntil: 'domcontentloaded',timeout: 30000});
 
         //添加延迟，以便数据完全响应再进行下一步。当然用waitUntil: 'networkidle0'也行。
         //await new Promise(resolve => setTimeout(resolve, 2500)); 
