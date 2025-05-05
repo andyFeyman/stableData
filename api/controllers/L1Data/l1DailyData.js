@@ -27,7 +27,7 @@ export const getL1DailyData = async (req, res) => {
 
         const finalyResult = combineL1Data(l1LatestData, basicDataList).reverse();
 
-        console.log(finalyResult);
+        //console.log(finalyResult);
         
 
         if (l1LatestData.length > 0) {
