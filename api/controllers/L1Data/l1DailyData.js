@@ -10,7 +10,7 @@ export const getL1DailyData = async (req, res) => {
     // 獲取當天的開始時間 (00:00:00 UTC)
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    
+
     //console.log(`Querying data from UTC start of day: ${today.toISOString()}`);
 
     try {
@@ -20,14 +20,17 @@ export const getL1DailyData = async (req, res) => {
             prisma.l1DailyData.findMany({
                 where: { updateTime: { gte: today } },
                 orderBy: { updateTime: "desc" },
-                take: 11,
+                take: 9,
             }),
         ]);
         //console.log(`Found ${l1LatestData.length} records for today (UTC), first record updateTime: ${l1LatestData[0]?.updateTime}`);
-        
+
         const finalyResult = combineL1Data(l1LatestData, basicDataList).reverse();
 
-        if (l1LatestData.length <= 11) {
+        console.log(finalyResult);
+        
+
+        if (l1LatestData.length > 0) {
             res.status(200).json(finalyResult);
         } else {
             console.log("the latest data doesn't update yet, here is the older data:");
@@ -35,7 +38,7 @@ export const getL1DailyData = async (req, res) => {
                 prisma.l1BasicData.findMany({}),
                 prisma.l1DailyData.findMany({
                     orderBy: { updateTime: "desc" },
-                    take: 11,
+                    take: 9,
                 }),
             ]);
             const OlderResult = combineL1Data(l1LatestData, basicDataList).reverse();

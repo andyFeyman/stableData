@@ -63,13 +63,13 @@ async function l1DataRunner() {
             //suiPlugin(), // 特殊处理不需要page的插件
             nearPlugin(), // 特殊处理不需要page的插件
             setupPluginWithPage(browser, mantlePlugin, 9),
-            setupPluginWithPage(browser, kasPlugin, 10)
+            //setupPluginWithPage(browser, kasPlugin, 10)
         ];
 
         // 并行执行所有任务
         const results = await Promise.all(tasks);
 
-        if (results.length !== 10) {
+        if (results.length !== 9) {
             console.log("L1 DailyData incomplete!");
             return ("L1 DailyData incomplete! tasklist::", results);
         }
