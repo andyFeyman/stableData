@@ -12,7 +12,7 @@ export default function L2DataPage() {
     <div className="w-full py-6  flex flex-col items-center">
       {/* Parent container for centering */}
       <Helmet>
-        <title>chain explorer crypto </title>
+        <title>chain explorers</title>
         <meta
           name="description"
           content="Track real-time cryptocurrency trading data, including daily volume, TPS (transactions per second), and average fees. Explore blockchain explorer links for in-depth transaction details.  provides instant updates to help you stay on top of the market."
