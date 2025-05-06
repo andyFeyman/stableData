@@ -111,15 +111,6 @@ function ChainLayout() {
       <div className="drawer-side mt-20">
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 w-60 p-2 min-h-1/2">
-          {/* <!-- Sidebar content here --> */}
-          {/* ADDED: dropdown-hover (for sidebar dropdown) */}
-          {/* <div className="dropdown dropdown-bottom text-center dropdown-hover">
-            <div tabIndex={0} role="button" className="btn btn-ghost text-xl pt-2 text-center"><h5>Bitcoin Data ↓</h5> </div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-58 p-2 shadow-sm">
-              <li><a className="btn btn-ghost bg-gray-700" href="/btc4years">bitcoin 4 year cycle</a></li>
-              <li><a className="btn btn-ghost bg-gray-700" href="/btcCompare"> Bitcoin vs. Stock Market</a></li>
-            </ul>
-          </div> */}
           <li className="hover:bg-white"><a className="btn btn-ghost text-sm " href="/btc4years">bitcoin 4 year cycle</a></li>
           <li className="hover:bg-white"><a className="btn btn-ghost text-sm " href="/btcCompare"> Bitcoin vs. Stock Market</a></li>
           <li className="hover:bg-white"><a href="/chainExplorers" className="btn btn-ghost text-sm">Chains Explorer</a></li>

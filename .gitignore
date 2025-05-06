@@ -10,6 +10,5 @@ dist-ssr
 *.local
 allL1Data.js
 .env.*
-btcCompareData.js
 vite.config.js
 
