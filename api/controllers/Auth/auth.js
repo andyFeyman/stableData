@@ -120,7 +120,7 @@ router.post("/register/verify-code", async (req, res, next) => {
     // Store temp user data in a temporary cookie
     res.cookie("tempUser", JSON.stringify({ email, username: tempUser.username, isEmailVerified: true }), {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
       maxAge: 60 * 60 * 1000, // 1 hour
     });
@@ -163,7 +163,7 @@ router.post("/register/options", async (req, res, next) => {
 
     res.cookie("challenge", options.challenge, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
       maxAge: 5 * 60 * 1000, // 5 minutes
     });
@@ -227,9 +227,9 @@ router.post("/register/verify", async (req, res, next) => {
     const token = generateJWT(user.id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 72 * 60 * 60 * 1000, // 72 hours
     });
 
     res.clearCookie("tempUser");
@@ -269,7 +269,7 @@ router.post("/login/options", async (req, res, next) => {
 
     res.cookie("challenge", options.challenge, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
       maxAge: 5 * 60 * 1000, // 5 minutes
     });
@@ -335,9 +335,9 @@ router.post("/login/verify", async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 72 * 60 * 60 * 1000, // 24 hours
     });
 
 
@@ -474,9 +474,9 @@ router.post("/login/verify-code", async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "prd",
       sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 72 * 60 * 60 * 1000, // 24 hours
     });
 
     // 成功后删除该邮件的所有验证码
